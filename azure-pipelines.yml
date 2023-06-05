@@ -1,0 +1,19 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: Docker@2
+  displayName: 'Build and push backend'
+  inputs:
+    containerRegistry: 'gustav87 Docker Hub'
+    repository: 'gustav87/react1-backend'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
+    buildContext: '**'
+
