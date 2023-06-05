@@ -6,7 +6,7 @@ COPY *.csproj ./
 RUN dotnet restore
 
 COPY . .
-RUN dotnet publish "./mydotnet.csproj" -c Release -o out
+RUN dotnet publish "./react1-backend.csproj" -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
@@ -17,5 +17,5 @@ ENV VIRTUAL_HOST=react1-backend.gstav.se
 ENV LETSENCRYPT_HOST=react1-backend.gstav.se
 EXPOSE 80
 
-ENTRYPOINT ["dotnet", "mydotnet.dll"]
+ENTRYPOINT ["dotnet", "react1-backend.dll"]
 
