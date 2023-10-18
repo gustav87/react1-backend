@@ -13,8 +13,8 @@ public class TestController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet("weather")]
+    public IEnumerable<WeatherForecast> GetWeather()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
@@ -23,5 +23,17 @@ public class TestController : ControllerBase
             Summary = "cheese"
         })
         .ToArray();
+    }
+
+    [HttpGet("test1")]
+    public Test1 GetTest1()
+    {
+        Test1 x = new() { Summary = "hi!" };
+        return x;
+    }
+
+    public class Test1
+    {
+        public string? Summary { get; set; }
     }
 }

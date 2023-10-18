@@ -16,7 +16,7 @@ public class CatchAllController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult CatchAllGet(string catchAll)
+    public IActionResult CatchAllGet(string? catchAll)
     {
         HttpError err = new HttpError();
         err.msg = $"Route '{catchAll}' does not exist";
