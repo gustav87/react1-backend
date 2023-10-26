@@ -1,5 +1,6 @@
 using Amazon.S3.Model;
 using Microsoft.AspNetCore.Mvc;
+using react1_backend.CloudStorage;
 
 namespace react1_backend.S3;
 
@@ -12,7 +13,7 @@ public class S3Controller : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<string>> ListFiles()
+    public async Task<List<CloudFile>> ListFiles()
     {
         S3Service amazonS3Service = new S3Service();
         var fileList = await amazonS3Service.ListFiles();
@@ -34,7 +35,7 @@ public class S3Controller : ControllerBase
     }
 
     [HttpPost("upload")]
-    public void UploadFile([FromBody] UploadFileRequest2 req)
+    public void UploadFile([FromBody] UploadFileRequest req)
     {
         S3Service amazonS3Service = new S3Service();
         amazonS3Service.UploadFile(req);
@@ -57,15 +58,4 @@ public class S3Response
 public class UploadFileViaNameRequest
 {
     public string FilePath { get; set; }
-}
-
-public class UploadFileRequest
-{
-    public string Name { get; set; }
-}
-
-public class UploadFileRequest2
-{
-    public string Name { get; set; }
-    public string Content { get; set; }
 }

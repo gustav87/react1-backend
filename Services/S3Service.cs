@@ -3,6 +3,7 @@ using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
+using react1_backend.CloudStorage;
 
 namespace react1_backend.S3;
 
@@ -11,10 +12,12 @@ public class S3Service : IS3Service
   private readonly string bucketName = "gustavbucket1";
   private readonly string awsAccessKey = Environment.GetEnvironmentVariable("awsAccessKey") ?? "";
   private readonly string awsSecretKey = Environment.GetEnvironmentVariable("awsSecretKey") ?? "";
+  private readonly Amazon.RegionEndpoint awsEndpoint = Amazon.RegionEndpoint.EUNorth1;
+  private readonly string awsPrefix = "";
 
-  public async Task<List<string>> ListFiles()
+  public async Task<List<CloudFile>> ListFiles()
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     try
     {
@@ -24,7 +27,13 @@ public class S3Service : IS3Service
           Prefix = ""
       };
       ListObjectsResponse listResponse = await client.ListObjectsAsync(listRequest);
-      var fileNames = listResponse.S3Objects.Select(obj => obj.Key).ToList();
+      var fileNames = listResponse.S3Objects
+        .Where(x => x.Size != 0) // Filter out the directory containing the files
+        .Select(x => new CloudFile {
+          Name = x.Key.Substring(x.Key.LastIndexOf("/") + 1),
+          Size = x.Size / 1024, // Size in kilobytes
+          LastModified = x.LastModified
+        }).ToList();
       return fileNames;
     }
     catch (Exception ex)
@@ -35,7 +44,7 @@ public class S3Service : IS3Service
 
   public async void ListFilesInConsole()
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     try
     {
@@ -65,7 +74,7 @@ public class S3Service : IS3Service
 
   public async void UploadFile(string filePath)
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     try
     {
@@ -86,7 +95,7 @@ public class S3Service : IS3Service
 
   public async void UploadFile(IFormFile file)
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     try
     {
@@ -111,9 +120,9 @@ public class S3Service : IS3Service
     }
   }
 
-  public async void UploadFile(UploadFileRequest2 file)
+  public async void UploadFile(UploadFileRequest file)
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
     try
     {
       byte[] bytes = Convert.FromBase64String(file.Content);
@@ -134,7 +143,7 @@ public class S3Service : IS3Service
 
   public async Task<byte[]> DownloadFile(string fileName)
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     MemoryStream? ms = null;
 
@@ -170,7 +179,7 @@ public class S3Service : IS3Service
 
   public async void DeleteFile(string fileName)
   {
-    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, Amazon.RegionEndpoint.EUNorth1);
+    var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
     DeleteObjectRequest request = new DeleteObjectRequest
     {

@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aliyun.OSS.SDK.NetCore" Version="2.13.0" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.205.12" />
     <PackageReference Include="MongoDB.Driver" Version="2.19.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
