@@ -16,7 +16,12 @@
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "awsAccessKey": "x",
-        "awsSecretKey": "y"
+        "awsSecretKey": "x",
+        "alibabaAccessKey": "x",
+        "alibabaSecretKey": "x",
+        "MONGO_CONNECTION_STRING": "mongodb://localhost:27017",
+        "adminToken": "x",
+        "userToken": "x"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

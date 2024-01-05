@@ -1,61 +1,82 @@
-using Amazon.S3.Model;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using react1_backend.CloudStorage;
+using react1_backend.Filters.ActionFilters;
 
 namespace react1_backend.S3;
 
 [ApiController]
 [Route("api/[controller]")]
+[AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
 public class S3Controller : ControllerBase
 {
-    public S3Controller()
-    {
-    }
+  private readonly S3Service _s3Service;
+  public S3Controller
+  (
+    S3Service s3Service
+  )
+  {
+    _s3Service = s3Service;
+  }
 
-    [HttpGet]
-    public async Task<List<CloudFile>> ListFiles()
-    {
-        S3Service amazonS3Service = new S3Service();
-        var fileList = await amazonS3Service.ListFiles();
-        return fileList;
-    }
+  [HttpGet]
+  [AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to this action only.
+  public async Task<List<CloudFile>> ListFiles()
+  {
+    var fileList = await _s3Service.ListFiles();
+    return fileList;
+  }
 
-    [HttpGet("test")]
-    public S3Response GetS3Response()
-    {
-        S3Response x = new() { Name = "xxx" };
-        return x;
-    }
+  [HttpGet("test")]
+  public S3Response GetS3Response()
+  {
+    S3Response x = new() { Name = "xxx" };
+    return x;
+  }
 
-    [HttpPost("upload/name")]
-    public void UploadFileViaName([FromBody] UploadFileViaNameRequest req)
-    {
-        S3Service amazonS3Service = new S3Service();
-        amazonS3Service.UploadFile(req.FilePath);
-    }
+  [HttpPost("upload/name")]
+  public void UploadFileViaName([FromBody] UploadFileViaNameRequest req)
+  {
+    _s3Service.UploadFile(req.FilePath);
+  }
 
-    [HttpPost("upload")]
-    public void UploadFile([FromBody] UploadFileRequest req)
+  [HttpPost("upload")]
+  public async Task<IActionResult> UploadFile([FromBody] UploadFileRequest req)
+  {
+    try
     {
-        S3Service amazonS3Service = new S3Service();
-        amazonS3Service.UploadFile(req);
+      var fileList = await _s3Service.ListFiles();
+      if (fileList.Select(f => f.Name).Contains(req.Name))
+      {
+        throw new ValidationException($"Could not upload file. File {req.Name} already exists.");
+      }
+      _s3Service.UploadFile(req);
+      return Ok($"File {req.Name} uploaded!");
     }
+    catch (ValidationException ex)
+    {
+      return BadRequest(ex.Message);
+    }
+    catch (Exception ex)
+    {
+      return StatusCode(500, ex.Message);
+    }
+  }
 
-    [HttpGet("download/{fileName}")]
-    public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
-    {
-        S3Service amazonS3Service = new S3Service();
-        var file = await amazonS3Service.DownloadFile(fileName);
-        return File(file, "application/octet-stream", fileName);
-    }
+  [HttpGet("download/{fileName}")]
+  public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
+  {
+    var file = await _s3Service.DownloadFile(fileName);
+    return File(file, "application/octet-stream", fileName);
+  }
 }
 
 public class S3Response
 {
-    public string? Name { get; set; }
+  public string? Name { get; set; }
 }
 
 public class UploadFileViaNameRequest
 {
-    public string FilePath { get; set; }
+  public string FilePath { get; set; } = null!;
 }

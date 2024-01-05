@@ -1,24 +1,30 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using react1_backend.CloudStorage;
+using react1_backend.Filters.ActionFilters;
 
 namespace react1_backend.Alibaba;
 
 [ApiController]
 [Route("api/[controller]")]
+[AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
 public class AlibabaController : ControllerBase
 {
-  public AlibabaController()
+  private readonly AlibabaService _alibabaService;
+  public AlibabaController
+  (
+    AlibabaService alibabaService
+  )
   {
+    _alibabaService = alibabaService;
   }
 
   [HttpGet]
   public IActionResult ListFiles()
   {
-    AlibabaService alibabaService = new AlibabaService();
     try
     {
-      var fileList = alibabaService.ListFiles();
+      var fileList = _alibabaService.ListFiles();
       return Ok(fileList);
     }
     catch (Exception ex)
@@ -30,15 +36,14 @@ public class AlibabaController : ControllerBase
   [HttpPost("upload")]
   public IActionResult UploadFile([FromBody] UploadFileRequest req)
   {
-    AlibabaService alibabaService = new AlibabaService();
     try
     {
-      var fileList = alibabaService.ListFiles();
+      var fileList = _alibabaService.ListFiles();
       if (fileList.Select(f => f.Name).Contains(req.Name))
       {
         throw new ValidationException($"Could not upload file. File {req.Name} already exists.");
       }
-      alibabaService.UploadFile(req);
+      _alibabaService.UploadFile(req);
       return Ok($"File {req.Name} uploaded!");
     }
     catch (ValidationException ex)
@@ -54,15 +59,14 @@ public class AlibabaController : ControllerBase
   [HttpGet("download/{fileName}")]
   public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
   {
-    AlibabaService alibabaService = new AlibabaService();
     try
     {
-      var fileList = alibabaService.ListFiles();
+      var fileList = _alibabaService.ListFiles();
       if (!fileList.Select(f => f.Name).Contains(fileName))
       {
         throw new ValidationException($"Could not download file. File {fileName} does not exist.");
       }
-      var file = await alibabaService.DownloadFile(fileName);
+      var file = await _alibabaService.DownloadFile(fileName);
       return File(file, "application/octet-stream", fileName);
     }
     catch (Exception ex)
@@ -74,15 +78,14 @@ public class AlibabaController : ControllerBase
   [HttpDelete("{fileName}")]
   public IActionResult DeleteFile([FromRoute] string fileName)
   {
-    AlibabaService alibabaService = new AlibabaService();
     try
     {
-      var fileList = alibabaService.ListFiles();
+      var fileList = _alibabaService.ListFiles();
       if (!fileList.Select(f => f.Name).Contains(fileName))
       {
         throw new ValidationException($"Could not delete file. File {fileName} does not exist.");
       }
-      var status = alibabaService.DeleteFile(fileName);
+      var status = _alibabaService.DeleteFile(fileName);
       return Ok($"File {fileName} deleted.");
     }
     catch (ValidationException ex)

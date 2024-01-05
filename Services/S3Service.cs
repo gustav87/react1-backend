@@ -1,4 +1,3 @@
-using System;
 using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
@@ -27,14 +26,14 @@ public class S3Service : IS3Service
           Prefix = ""
       };
       ListObjectsResponse listResponse = await client.ListObjectsAsync(listRequest);
-      var fileNames = listResponse.S3Objects
+      var files = listResponse.S3Objects
         .Where(x => x.Size != 0) // Filter out the directory containing the files
         .Select(x => new CloudFile {
           Name = x.Key.Substring(x.Key.LastIndexOf("/") + 1),
           Size = x.Size / 1024, // Size in kilobytes
           LastModified = x.LastModified
         }).ToList();
-      return fileNames;
+      return files;
     }
     catch (Exception ex)
     {
