@@ -14,9 +14,14 @@ public class AccountService
   public AccountService(
     IOptions<AccountDatabaseSettings> accountDatabaseSettings)
   {
-    var mongoClient = new MongoClient(accountDatabaseSettings.Value.ConnectionString);
-    var mongoDatabase = mongoClient.GetDatabase(accountDatabaseSettings.Value.DatabaseName);
-    _accountCollection = mongoDatabase.GetCollection<Account>(accountDatabaseSettings.Value.AccountCollectionName);
+    string mongoConnectionString = Environment.GetEnvironmentVariable("mongoConnectionString")  ?? "mongodb://localhost:27017";
+
+    MongoClientSettings mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+    mongoClientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
+    mongoClientSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
+    var mongoClient = new MongoClient(mongoClientSettings);
+    var mongoDatabase = mongoClient.GetDatabase("react1-backend");
+    _accountCollection = mongoDatabase.GetCollection<Account>("Account");
   }
 
   public async Task<string> LogIn(Account req)
