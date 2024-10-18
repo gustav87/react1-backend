@@ -8,5 +8,5 @@ public class Account
     public string Id => Username;
     public string Username { get; set; } = null!;
     public string Password { get; set; } = null!;
-    public bool Admin { get; set; } = true;
+    public bool Admin { get; set; } = false;
 }
