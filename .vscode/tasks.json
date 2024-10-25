@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/react1-backend.sln",
+        "${workspaceFolder}/React1-backend.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/react1-backend.sln",
+        "${workspaceFolder}/React1-backend.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -33,7 +33,7 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/react1-backend.sln"
+        "${workspaceFolder}/React1-backend.sln"
       ],
       "problemMatcher": "$msCompile"
     }

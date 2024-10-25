@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/net6.0/react1-backend.dll",
+      "program": "${workspaceFolder}/bin/Debug/net6.0/React1-backend.dll",
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": false,
@@ -19,9 +19,11 @@
         "awsSecretKey": "x",
         "alibabaAccessKey": "x",
         "alibabaSecretKey": "x",
-        "MONGO_CONNECTION_STRING": "mongodb://localhost:27017",
+        "mongoConnectionString": "mongodb://localhost:27017",
         "adminToken": "x",
-        "userToken": "x"
+        "userToken": "x",
+        "paypalClientId": "x",
+        "paypalSecretKey": "x"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
