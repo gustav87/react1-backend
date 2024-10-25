@@ -12,7 +12,7 @@ public class S3Service : IS3Service
   private readonly string awsAccessKey = Environment.GetEnvironmentVariable("awsAccessKey") ?? "";
   private readonly string awsSecretKey = Environment.GetEnvironmentVariable("awsSecretKey") ?? "";
   private readonly Amazon.RegionEndpoint awsEndpoint = Amazon.RegionEndpoint.EUNorth1;
-  private readonly string awsPrefix = "";
+  // private readonly string awsPrefix = "";
 
   public async Task<List<CloudFile>> ListFiles()
   {

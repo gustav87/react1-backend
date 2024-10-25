@@ -4,6 +4,7 @@ using react1_backend.Services;
 using react1_backend.Account;
 using react1_backend.S3;
 using react1_backend.Alibaba;
+using react1_backend.Paypal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,7 @@ builder.Services.AddSingleton<AccountService>();
 // Add services
 builder.Services.AddSingleton<S3Service>();
 builder.Services.AddSingleton<AlibabaService>();
+builder.Services.AddSingleton<PaypalService>();
 
 // Add Swagger. Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
