@@ -1,11 +1,11 @@
 using System.Net;
-using react1_backend.CloudStorage;
+using React1_backend.Contracts;
 
-namespace react1_backend.Alibaba;
+namespace React1_backend.Alibaba;
 
 public interface IAlibabaService
 {
-  List<CloudFile> ListFiles();
+	List<CloudFile> ListFiles();
 	void UploadFile(UploadFileRequest file);
 	Task<byte[]> DownloadFile(string fileName);
 	HttpStatusCode DeleteFile(string fileName);

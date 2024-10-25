@@ -2,9 +2,9 @@ using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
-using react1_backend.CloudStorage;
+using React1_backend.Contracts;
 
-namespace react1_backend.S3;
+namespace React1_backend.S3;
 
 public class S3Service : IS3Service
 {
@@ -12,7 +12,7 @@ public class S3Service : IS3Service
   private readonly string awsAccessKey = Environment.GetEnvironmentVariable("awsAccessKey") ?? "";
   private readonly string awsSecretKey = Environment.GetEnvironmentVariable("awsSecretKey") ?? "";
   private readonly Amazon.RegionEndpoint awsEndpoint = Amazon.RegionEndpoint.EUNorth1;
-  private readonly string awsPrefix = "";
+  // private readonly string awsPrefix = "";
 
   public async Task<List<CloudFile>> ListFiles()
   {

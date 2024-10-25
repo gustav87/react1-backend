@@ -1,9 +1,9 @@
-using react1_backend.Contracts;
+using React1_backend.Contracts;
 
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace react1_backend.Account;
+namespace React1_backend.Account;
 
 public class AccountService
 {
