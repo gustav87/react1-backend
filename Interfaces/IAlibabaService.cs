@@ -1,7 +1,7 @@
 using System.Net;
-using react1_backend.CloudStorage;
+using React1_backend.CloudStorage;
 
-namespace react1_backend.Alibaba;
+namespace React1_backend.Alibaba;
 
 public interface IAlibabaService
 {

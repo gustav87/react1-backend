@@ -1,7 +1,7 @@
 using Amazon.S3.Model;
-using react1_backend.CloudStorage;
+using React1_backend.CloudStorage;
 
-namespace react1_backend.S3;
+namespace React1_backend.S3;
 
 public interface IS3Service
 {

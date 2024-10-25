@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
 
-namespace react1_backend.Controllers;
+namespace React1_backend.Controllers;
 
 [ApiController]
 [Route("{**catchAll}")]

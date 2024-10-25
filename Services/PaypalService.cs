@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace react1_backend.Paypal;
+namespace React1_backend.Paypal;
 
 public class PaypalService
 {

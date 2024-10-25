@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
-namespace react1_backend.Account;
+namespace React1_backend.Account;
 
 [ApiController]
 [Route("api/[controller]")]

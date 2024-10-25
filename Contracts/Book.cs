@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace react1_backend.Contracts;
+namespace React1_backend.Contracts;
 
 public class Book
 {

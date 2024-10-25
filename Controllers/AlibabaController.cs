@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
-using react1_backend.CloudStorage;
-using react1_backend.Filters.ActionFilters;
+using React1_backend.CloudStorage;
+using React1_backend.Filters.ActionFilters;
 
-namespace react1_backend.Alibaba;
+namespace React1_backend.Alibaba;
 
 [ApiController]
 [Route("api/[controller]")]

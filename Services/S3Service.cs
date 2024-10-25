@@ -2,9 +2,9 @@ using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
-using react1_backend.CloudStorage;
+using React1_backend.CloudStorage;
 
-namespace react1_backend.S3;
+namespace React1_backend.S3;
 
 public class S3Service : IS3Service
 {

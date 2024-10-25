@@ -1,10 +1,10 @@
-using react1_backend.Filters.ActionFilters;
-using react1_backend.Contracts;
-using react1_backend.Services;
-using react1_backend.Account;
-using react1_backend.S3;
-using react1_backend.Alibaba;
-using react1_backend.Paypal;
+using React1_backend.Filters.ActionFilters;
+using React1_backend.Contracts;
+using React1_backend.Services;
+using React1_backend.Account;
+using React1_backend.S3;
+using React1_backend.Alibaba;
+using React1_backend.Paypal;
 
 var builder = WebApplication.CreateBuilder(args);
 

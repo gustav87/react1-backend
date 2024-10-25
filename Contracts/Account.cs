@@ -1,6 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace react1_backend.Account;
+namespace React1_backend.Account;
 
 public class Account
 {

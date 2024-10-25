@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>react1_backend</RootNamespace>
+    <RootNamespace>React1_backend</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

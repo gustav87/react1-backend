@@ -1,4 +1,4 @@
-namespace react1_backend.Paypal;
+namespace React1_backend.Paypal;
 
 public class PaypalRepository
 {

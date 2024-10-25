@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace react1_backend.Filters.ActionFilters;
+namespace React1_backend.Filters.ActionFilters;
 
 public class ActionFilterExample : IActionFilter
 {

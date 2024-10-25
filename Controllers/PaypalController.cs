@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace react1_backend.Paypal;
+namespace React1_backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]
