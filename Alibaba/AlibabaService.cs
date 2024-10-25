@@ -1,7 +1,6 @@
-using System;
 using System.Net;
 using Aliyun.OSS;
-using React1_backend.CloudStorage;
+using React1_backend.Contracts;
 
 namespace React1_backend.Alibaba;
 

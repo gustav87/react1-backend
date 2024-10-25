@@ -1,4 +1,4 @@
-namespace React1_backend.Paypal;
+namespace React1_backend.Contracts;
 
 public class GetTokenResponse
 {

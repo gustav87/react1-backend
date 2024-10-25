@@ -2,7 +2,7 @@ using System.Net;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Transfer;
-using React1_backend.CloudStorage;
+using React1_backend.Contracts;
 
 namespace React1_backend.S3;
 

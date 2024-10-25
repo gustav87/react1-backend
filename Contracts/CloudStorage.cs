@@ -1,4 +1,4 @@
-namespace React1_backend.CloudStorage;
+namespace React1_backend.Contracts;
 
 public class CloudFile
 {

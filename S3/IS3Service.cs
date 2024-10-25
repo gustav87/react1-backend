@@ -1,5 +1,4 @@
-using Amazon.S3.Model;
-using React1_backend.CloudStorage;
+using React1_backend.Contracts;
 
 namespace React1_backend.S3;
 
