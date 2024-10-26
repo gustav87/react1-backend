@@ -41,12 +41,12 @@ public class PaypalService
     if (string.IsNullOrEmpty(content)) throw new Exception("");
     var deserializeObject = JsonConvert.DeserializeObject<GetTransactionsResponse>(content) ?? throw new Exception("");
 
-    List<Amount> filtered = deserializeObject.Transaction_details
+    List<Amount> amounts = deserializeObject.Transaction_details
       .Where(x => x.Transaction_info.Fee_amount is not null)
       .Select(x => x.Transaction_info.Transaction_amount)
       .ToList();
 
-    return filtered ?? throw new Exception("");
+    return amounts ?? throw new Exception("");
   }
 
   public async Task<GetBalanceResponse> GetBalance()
