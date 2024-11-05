@@ -103,7 +103,7 @@ public class PaypalService
   private async Task<HttpResponseMessage> SendRequestWithToken(HttpMethod method, string url)
   {
       var httpClient = new HttpClient();
-      var request = new HttpRequestMessage(HttpMethod.Get, url);
+      var request = new HttpRequestMessage(method, url);
       request.Headers.Add("Authorization", $"Bearer {token}");
       return await httpClient.SendAsync(request);
   }
