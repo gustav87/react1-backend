@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using React1_backend.Filters.ActionFilters;
 
 namespace React1_backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]
+[AsyncAdminTokenFilter(PermissionName = "hi")]
 public class PaypalController(PaypalService paypalService) : ControllerBase
 {
   private readonly PaypalService _paypalService = paypalService;

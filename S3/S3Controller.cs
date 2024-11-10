@@ -7,13 +7,13 @@ namespace React1_backend.S3;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
+[AsyncAdminTokenFilter(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
 public class S3Controller(S3Service s3Service) : ControllerBase
 {
   private readonly S3Service _s3Service = s3Service;
 
     [HttpGet]
-  [AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to this action only.
+  [AsyncAdminTokenFilter(PermissionName = "hi")] // This applies the attribute to this action only.
   public async Task<List<CloudFile>> ListFiles()
   {
     var fileList = await _s3Service.ListFiles();

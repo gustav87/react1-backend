@@ -2,15 +2,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace React1_backend.Filters.ActionFilters;
 
-public class ActionFilterExample : IActionFilter
+public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IActionFilter
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
     private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";
-
-    public ActionFilterExample(IHttpContextAccessor httpContextAccessor)
-    {
-        _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
-    }
 
     public void OnActionExecuting(ActionExecutingContext context)
     {

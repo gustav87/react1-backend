@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace React1_backend.Filters.ActionFilters;
 
-public class AsyncActionFilterExample : Attribute, IAsyncActionFilter
+public class AsyncAdminTokenFilter : Attribute, IAsyncActionFilter
 {
     public string? PermissionName { get; set; }
     private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";

@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ActionFilterExample>();
-builder.Services.AddScoped<AsyncActionFilterExample>();
+builder.Services.AddScoped<AsyncAdminTokenFilter>();
 
 // Add controllers
 builder.Services.AddControllers();
