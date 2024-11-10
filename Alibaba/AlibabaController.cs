@@ -10,84 +10,84 @@ namespace React1_backend.Alibaba;
 [AsyncAdminTokenFilter(PermissionName = "hi")]
 public class AlibabaController(AlibabaService alibabaService) : ControllerBase
 {
-  private readonly AlibabaService _alibabaService = alibabaService;
+    private readonly AlibabaService _alibabaService = alibabaService;
 
-  [HttpGet]
-  public IActionResult ListFiles()
-  {
-    try
+    [HttpGet]
+    public IActionResult ListFiles()
     {
-      var fileList = _alibabaService.ListFiles();
-      return Ok(fileList);
+        try
+        {
+            var fileList = _alibabaService.ListFiles();
+            return Ok(fileList);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 
-  [HttpPost("upload")]
-  public IActionResult UploadFile([FromBody] UploadFileRequest req)
-  {
-    try
+    [HttpPost("upload")]
+    public IActionResult UploadFile([FromBody] UploadFileRequest req)
     {
-      var fileList = _alibabaService.ListFiles();
-      if (fileList.Select(f => f.Name).Contains(req.Name))
-      {
-        throw new ValidationException($"Could not upload file. File {req.Name} already exists.");
-      }
-      _alibabaService.UploadFile(req);
-      return Ok($"File {req.Name} uploaded!");
+        try
+        {
+            var fileList = _alibabaService.ListFiles();
+            if (fileList.Select(f => f.Name).Contains(req.Name))
+            {
+                throw new ValidationException($"Could not upload file. File {req.Name} already exists.");
+            }
+            _alibabaService.UploadFile(req);
+            return Ok($"File {req.Name} uploaded!");
+        }
+        catch (ValidationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (ValidationException ex)
-    {
-      return BadRequest(ex.Message);
-    }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 
-  [HttpGet("download/{fileName}")]
-  public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
-  {
-    try
+    [HttpGet("download/{fileName}")]
+    public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
     {
-      var fileList = _alibabaService.ListFiles();
-      if (!fileList.Select(f => f.Name).Contains(fileName))
-      {
-        throw new ValidationException($"Could not download file. File {fileName} does not exist.");
-      }
-      var file = await _alibabaService.DownloadFile(fileName);
-      return File(file, "application/octet-stream", fileName);
+        try
+        {
+            var fileList = _alibabaService.ListFiles();
+            if (!fileList.Select(f => f.Name).Contains(fileName))
+            {
+                throw new ValidationException($"Could not download file. File {fileName} does not exist.");
+            }
+            var file = await _alibabaService.DownloadFile(fileName);
+            return File(file, "application/octet-stream", fileName);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 
-  [HttpDelete("{fileName}")]
-  public IActionResult DeleteFile([FromRoute] string fileName)
-  {
-    try
+    [HttpDelete("{fileName}")]
+    public IActionResult DeleteFile([FromRoute] string fileName)
     {
-      var fileList = _alibabaService.ListFiles();
-      if (!fileList.Select(f => f.Name).Contains(fileName))
-      {
-        throw new ValidationException($"Could not delete file. File {fileName} does not exist.");
-      }
-      var status = _alibabaService.DeleteFile(fileName);
-      return Ok($"File {fileName} deleted.");
+        try
+        {
+            var fileList = _alibabaService.ListFiles();
+            if (!fileList.Select(f => f.Name).Contains(fileName))
+            {
+                throw new ValidationException($"Could not delete file. File {fileName} does not exist.");
+            }
+            var status = _alibabaService.DeleteFile(fileName);
+            return Ok($"File {fileName} deleted.");
+        }
+        catch (ValidationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (ValidationException ex)
-    {
-      return BadRequest(ex.Message);
-    }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 }

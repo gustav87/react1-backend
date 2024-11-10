@@ -32,7 +32,8 @@ public class AsyncAdminTokenFilter : Attribute, IAsyncActionFilter
         var resultContext = await next();
     }
 
-    private bool ValidateToken(string? token) {
+    private bool ValidateToken(string? token)
+    {
         if (token is null) return false;
         return token == adminToken;
     }

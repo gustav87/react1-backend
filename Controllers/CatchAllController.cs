@@ -36,7 +36,7 @@ public class CatchAllController(ILogger<CatchAllController> logger) : Controller
 
     public class HttpError
     {
-        public string? msg {get; set;}
-        public HttpStatusCode? errorCode {get; set;}
+        public string? msg { get; set; }
+        public HttpStatusCode? errorCode { get; set; }
     }
 }

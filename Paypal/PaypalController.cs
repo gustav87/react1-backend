@@ -8,33 +8,33 @@ namespace React1_backend.Paypal;
 [AsyncAdminTokenFilter(PermissionName = "hi")]
 public class PaypalController(PaypalService paypalService) : ControllerBase
 {
-  private readonly PaypalService _paypalService = paypalService;
+    private readonly PaypalService _paypalService = paypalService;
 
     [HttpGet("transactions")]
-  public async Task<IActionResult> GetTransactions()
-  {
-    try
+    public async Task<IActionResult> GetTransactions()
     {
-      var transactions = await _paypalService.GetTransactions();
-      return Ok(transactions);
+        try
+        {
+            var transactions = await _paypalService.GetTransactions();
+            return Ok(transactions);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 
-  [HttpGet("balance")]
-  public async Task<IActionResult> GetBalance()
-  {
-    try
+    [HttpGet("balance")]
+    public async Task<IActionResult> GetBalance()
     {
-      var balance = await _paypalService.GetBalance();
-      return Ok(balance);
+        try
+        {
+            var balance = await _paypalService.GetBalance();
+            return Ok(balance);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
     }
-    catch (Exception ex)
-    {
-      return StatusCode(500, ex.Message);
-    }
-  }
 }
