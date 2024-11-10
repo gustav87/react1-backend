@@ -5,6 +5,8 @@ using React1_backend.Account;
 using React1_backend.S3;
 using React1_backend.Alibaba;
 using React1_backend.Paypal;
+using System.IO.Compression;
+using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ActionFilterExample>();
 builder.Services.AddScoped<AsyncAdminTokenFilter>();
+
+// builder.Services.AddResponseCompression(options =>
+// {
+//     options.EnableForHttps = true;
+// });
 
 // Add controllers
 builder.Services.AddControllers();
@@ -34,6 +41,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+// app.UseResponseCompression();
 
 // Enable CORS
 app.UseCors(builder =>
