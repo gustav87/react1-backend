@@ -6,14 +6,11 @@ namespace React1_backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class BooksController : ControllerBase
+public class BooksController(BooksService booksService) : ControllerBase
 {
-  private readonly BooksService _booksService;
+  private readonly BooksService _booksService = booksService;
 
-  public BooksController(BooksService booksService) =>
-    _booksService = booksService;
-
-  [HttpGet]
+    [HttpGet]
   public async Task<List<Book>> Get() =>
     await _booksService.GetAsync();
 

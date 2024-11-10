@@ -4,18 +4,11 @@ namespace React1_backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PaypalController : ControllerBase
+public class PaypalController(PaypalService paypalService) : ControllerBase
 {
-  private readonly PaypalService _paypalService;
-  public PaypalController
-  (
-    PaypalService paypalService
-  )
-  {
-    _paypalService = paypalService;
-  }
+  private readonly PaypalService _paypalService = paypalService;
 
-  [HttpGet("transactions")]
+    [HttpGet("transactions")]
   public async Task<IActionResult> GetTransactions()
   {
     try

@@ -5,20 +5,10 @@ namespace React1_backend.Account;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AccountController : ControllerBase
+public class AccountController(ILogger<AccountController> logger, AccountService accountService) : ControllerBase
 {
-    private readonly ILogger<AccountController> _logger;
-    private readonly AccountService _accountService;
-
-    public AccountController
-    (
-        ILogger<AccountController> logger,
-        AccountService accountService
-    )
-    {
-        _logger = logger;
-        _accountService = accountService;
-    }
+    private readonly ILogger<AccountController> _logger = logger;
+    private readonly AccountService _accountService = accountService;
 
     [HttpPost("log-in")]
     public async Task<IActionResult> LogIn([FromBody] Account req)

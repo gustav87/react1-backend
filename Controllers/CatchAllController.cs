@@ -6,14 +6,9 @@ namespace React1_backend.Controllers;
 
 [ApiController]
 [Route("{**catchAll}")]
-public class CatchAllController : ControllerBase
+public class CatchAllController(ILogger<CatchAllController> logger) : ControllerBase
 {
-    private readonly ILogger<CatchAllController> _logger;
-
-    public CatchAllController(ILogger<CatchAllController> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger<CatchAllController> _logger = logger;
 
     [HttpGet]
     public IActionResult CatchAllGet(string? catchAll)
