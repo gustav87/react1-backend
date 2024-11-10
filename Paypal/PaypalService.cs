@@ -33,13 +33,13 @@ public class PaypalService
 
     if (!response.IsSuccessStatusCode)
     {
-      throw new Exception("");
+      throw new Exception("Something went wrong");
     }
 
     string content = await response.Content.ReadAsStringAsync();
 
-    if (string.IsNullOrEmpty(content)) throw new Exception("");
-    var deserializeObject = JsonConvert.DeserializeObject<GetTransactionsResponse>(content) ?? throw new Exception("");
+    if (string.IsNullOrEmpty(content)) throw new Exception("Something went wrong");
+    var deserializeObject = JsonConvert.DeserializeObject<GetTransactionsResponse>(content) ?? throw new Exception("Something went wrong");
 
     List<Amount> amounts = deserializeObject.Transaction_details
       .Where(x => x.Transaction_info.Fee_amount is not null)
@@ -62,18 +62,18 @@ public class PaypalService
 
     if (!response.IsSuccessStatusCode)
     {
-      throw new Exception("");
+      throw new Exception("Something went wrong");
     }
 
     string content = await response.Content.ReadAsStringAsync();
 
-    if (string.IsNullOrEmpty(content)) throw new Exception("");
+    if (string.IsNullOrEmpty(content)) throw new Exception("Something went wrong");
     var deserializeObject = JsonConvert.DeserializeObject<GetBalanceResponse>(content);
 
-    return deserializeObject ?? throw new Exception("");
+    return deserializeObject ?? throw new Exception("Something went wrong");
   }
 
-    private async Task GetToken()
+  private async Task GetToken()
   {
     string url = $"{paypalApiUrl}/oauth2/token";
     var httpClient = new HttpClient();
@@ -87,24 +87,29 @@ public class PaypalService
 
     HttpResponseMessage response = await httpClient.SendAsync(request);
 
+    if (response.StatusCode == HttpStatusCode.Unauthorized)
+    {
+      throw new Exception("Paypal client ID or secret incorrect.");
+    }
+
     if (!response.IsSuccessStatusCode)
     {
-      throw new Exception("");
+      throw new Exception("Something went wrong");
     }
 
     string content = await response.Content.ReadAsStringAsync();
 
-    if (string.IsNullOrEmpty(content)) throw new Exception("");
+    if (string.IsNullOrEmpty(content)) throw new Exception("Something went wrong");
     var deserializeObject = JsonConvert.DeserializeObject<GetTokenResponse>(content);
 
-    token = deserializeObject!.Access_token ?? throw new Exception("");
+    token = deserializeObject!.Access_token ?? throw new Exception("Something went wrong");
   }
 
   private async Task<HttpResponseMessage> SendRequestWithToken(HttpMethod method, string url)
   {
-      var httpClient = new HttpClient();
-      var request = new HttpRequestMessage(method, url);
-      request.Headers.Add("Authorization", $"Bearer {token}");
-      return await httpClient.SendAsync(request);
+    var httpClient = new HttpClient();
+    var request = new HttpRequestMessage(method, url);
+    request.Headers.Add("Authorization", $"Bearer {token}");
+    return await httpClient.SendAsync(request);
   }
 }
