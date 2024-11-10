@@ -35,7 +35,7 @@ public class TestController(ILogger<TestController> logger) : ControllerBase
     [HttpGet("boynames")]
     public ActionResult<List<string>> GetBoyNames()
     {
-        string path = Path.Combine(Directory.GetCurrentDirectory(), "Test\\BoyNames2023.json");
+        string path = Path.Combine(Directory.GetCurrentDirectory(), "Test/BoyNames2023.json");
         string text = System.IO.File.ReadAllText(path);
         BoyNames? json = JsonConvert.DeserializeObject<BoyNames>(text);
         return Ok(json?.Names);
