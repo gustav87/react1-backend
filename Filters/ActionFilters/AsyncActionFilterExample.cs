@@ -10,7 +10,7 @@ public class AsyncActionFilterExample : Attribute, IAsyncActionFilter
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         // Do something before the action executes.
-        var containsToken = context.HttpContext.Request.Query.ContainsKey("token");
+        bool containsToken = context.HttpContext.Request.Query.ContainsKey("token");
         Console.WriteLine(PermissionName);
 
         if (!containsToken)
@@ -20,9 +20,9 @@ public class AsyncActionFilterExample : Attribute, IAsyncActionFilter
             return;
         }
 
-        var tokenValue = context.HttpContext.Request.Query["token"][0];
+        string? token = context.HttpContext.Request.Query["token"][0];
 
-        if (!ValidateToken(tokenValue))
+        if (!ValidateToken(token))
         {
             context.HttpContext.Response.StatusCode = 401; // BadRequest
             await context.HttpContext.Response.WriteAsync("Token validation failed.");
@@ -32,7 +32,8 @@ public class AsyncActionFilterExample : Attribute, IAsyncActionFilter
         var resultContext = await next();
     }
 
-    private bool ValidateToken(string token) {
+    private bool ValidateToken(string? token) {
+        if (token is null) return false;
         return token == adminToken;
     }
 }

@@ -35,6 +35,11 @@ public class AccountController(ILogger<AccountController> logger, AccountService
         }
         try
         {
+            List<Account> numberOfAccounts = await _accountService.GetAsync();
+            if (numberOfAccounts.Count > 5)
+            {
+                return StatusCode(503, "Too many accounts.");
+            }
             Account? account = await _accountService.GetAsyncByUsername(req.Username);
             if (account != null)
             {

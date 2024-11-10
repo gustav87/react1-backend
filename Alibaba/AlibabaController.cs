@@ -8,16 +8,9 @@ namespace React1_backend.Alibaba;
 [ApiController]
 [Route("api/[controller]")]
 [AsyncActionFilterExample(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
-public class AlibabaController : ControllerBase
+public class AlibabaController(AlibabaService alibabaService) : ControllerBase
 {
-  private readonly AlibabaService _alibabaService;
-  public AlibabaController
-  (
-    AlibabaService alibabaService
-  )
-  {
-    _alibabaService = alibabaService;
-  }
+  private readonly AlibabaService _alibabaService = alibabaService;
 
   [HttpGet]
   public IActionResult ListFiles()
