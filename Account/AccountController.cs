@@ -5,6 +5,7 @@ namespace React1_backend.Account;
 
 [ApiController]
 [Route("api/[controller]")]
+[AsyncAdminTokenFilter(PermissionName = "hi")]
 public class AccountController(ILogger<AccountController> logger, AccountService accountService) : ControllerBase
 {
     private readonly ILogger<AccountController> _logger = logger;
