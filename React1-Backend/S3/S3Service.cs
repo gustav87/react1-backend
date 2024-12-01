@@ -145,7 +145,7 @@ public class S3Service : IS3Service
     {
         var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
 
-        MemoryStream? ms = null;
+        MemoryStream ms = null;
 
         try
         {

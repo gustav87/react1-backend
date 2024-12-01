@@ -37,7 +37,7 @@ public class TestController(ILogger<TestController> logger) : ControllerBase
     {
         string path = Path.Combine(Directory.GetCurrentDirectory(), "Test/BoyNames2023.json");
         string text = System.IO.File.ReadAllText(path);
-        BoyNames? json = JsonConvert.DeserializeObject<BoyNames>(text);
+        BoyNames json = JsonConvert.DeserializeObject<BoyNames>(text);
         return Ok(json?.Names);
         // using (StreamReader r = new StreamReader("Test/BoyNames2023.json"))
         // {
@@ -50,12 +50,12 @@ public class TestController(ILogger<TestController> logger) : ControllerBase
 
     public class Test1
     {
-        public string? Summary { get; set; }
+        public string Summary { get; set; }
     }
 
     public class BoyNames
     {
         public int Year;
-        public List<string>? Names;
+        public List<string> Names;
     }
 }

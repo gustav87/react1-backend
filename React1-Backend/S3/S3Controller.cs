@@ -66,7 +66,7 @@ public class S3Controller(S3Service s3Service) : ControllerBase
 
 public class S3Response
 {
-    public string? Name { get; set; }
+    public string Name { get; set; }
 }
 
 public class UploadFileViaNameRequest

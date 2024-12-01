@@ -11,7 +11,7 @@ public class CatchAllController(ILogger<CatchAllController> logger) : Controller
     private readonly ILogger<CatchAllController> _logger = logger;
 
     [HttpGet]
-    public IActionResult CatchAllGet(string? catchAll)
+    public IActionResult CatchAllGet(string catchAll)
     {
         HttpError err = new HttpError();
         err.msg = $"Route '{catchAll}' does not exist";
@@ -36,7 +36,7 @@ public class CatchAllController(ILogger<CatchAllController> logger) : Controller
 
     public class HttpError
     {
-        public string? msg { get; set; }
+        public string msg { get; set; }
         public HttpStatusCode? errorCode { get; set; }
     }
 }

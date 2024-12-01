@@ -49,7 +49,7 @@ public class AlibabaService : IAlibabaService
     {
         var client = new OssClient(alibabaEndpoint, alibabaAccessKey, alibabaSecretKey);
 
-        MemoryStream? ms = null;
+        MemoryStream ms = null;
 
         try
         {

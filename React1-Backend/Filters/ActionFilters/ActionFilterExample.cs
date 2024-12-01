@@ -10,7 +10,7 @@ public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IAc
     public void OnActionExecuting(ActionExecutingContext context)
     {
         // Do something before the action executes.
-        string? queryString = context.HttpContext.Request.QueryString.Value;
+        string queryString = context.HttpContext.Request.QueryString.Value;
         bool containsToken = context.HttpContext.Request.Query.ContainsKey("token");
 
         // var token = _httpContextAccessor.HttpContext.Request.Headers["token"].ToString();
@@ -22,7 +22,7 @@ public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IAc
             return;
         }
 
-        string? tokenValue = context.HttpContext.Request.Query["token"][0];
+        string tokenValue = context.HttpContext.Request.Query["token"][0];
 
         if (!ValidateToken(tokenValue))
         {
@@ -38,7 +38,7 @@ public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IAc
         Console.WriteLine("ActionFilterExample executed");
     }
 
-    private bool ValidateToken(string? token)
+    private bool ValidateToken(string token)
     {
         if (token is null) return false;
         return token == adminToken;

@@ -15,7 +15,7 @@ public class AccountController(ILogger<AccountController> logger, AccountService
     [HttpPost("log-in")]
     public async Task<IActionResult> LogIn([FromBody] Account req)
     {
-        if (IsEmpty(req))
+        if (_accountService.IsEmpty(req))
         {
             return BadRequest("Username or Password cannot be empty.");
         }
@@ -31,7 +31,7 @@ public class AccountController(ILogger<AccountController> logger, AccountService
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] Account req)
     {
-        if (IsEmpty(req))
+        if (_accountService.IsEmpty(req))
         {
             return BadRequest("Username or Password cannot be empty.");
         }
@@ -42,7 +42,7 @@ public class AccountController(ILogger<AccountController> logger, AccountService
             {
                 return StatusCode(503, "Too many accounts.");
             }
-            Account? account = await _accountService.GetAsyncByUsername(req.Username);
+            Account account = await _accountService.GetAsyncByUsername(req.Username);
             if (account != null)
             {
                 return Conflict($"User {req.Username} already exists.");
@@ -55,10 +55,5 @@ public class AccountController(ILogger<AccountController> logger, AccountService
             Console.WriteLine(ex.Message);
             return StatusCode(503, "Something went wrong.");
         }
-    }
-
-    private static bool IsEmpty(Account account)
-    {
-        return string.IsNullOrEmpty(account.Username) || string.IsNullOrEmpty(account.Password);
     }
 }
