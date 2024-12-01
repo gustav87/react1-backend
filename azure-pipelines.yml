@@ -14,20 +14,20 @@ steps:
 
 # Restore project
 - task: DotNetCoreCLI@2
-  displayName: dotnet restore
+  displayName: Run dotnet restore
   inputs:
     command: 'restore'
     feedsToUse: 'select'
 
 # Build project
 - task: DotNetCoreCLI@2
-  displayName: dotnet build
+  displayName: Run dotnet build
   inputs:
     command: 'build'
 
 # Run tests and auto publish test results.
 - task: DotNetCoreCLI@2
-  displayName: dotnet test
+  displayName: Run dotnet test
   inputs:
     command: 'test'
 
