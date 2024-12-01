@@ -17,7 +17,7 @@ public class Tests
     public void TestStartsWithUpper()
     {
         // Tests that we expect to return true.
-        string[] words = ["Alphabet", "Aebra", "ABC"];
+        string[] words = ["Alphabet", "Zebra", "ABC"];
         foreach (string word in words)
         {
             bool result = word.StartsWith('A');
