@@ -2,7 +2,6 @@ using React1_Backend.Contracts;
 using React1_Backend.Account;
 namespace React1_Backend_Tests;
 
-[TestFixture]
 public class Tests
 {
     private AccountService _accountService;
