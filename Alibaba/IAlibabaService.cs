@@ -1,7 +1,7 @@
 using System.Net;
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 
-namespace React1_backend.Alibaba;
+namespace React1_Backend.Alibaba;
 
 public interface IAlibabaService
 {

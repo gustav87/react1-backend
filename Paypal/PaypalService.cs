@@ -2,9 +2,9 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using Newtonsoft.Json;
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 
-namespace React1_backend.Paypal;
+namespace React1_Backend.Paypal;
 
 public class PaypalService
 {

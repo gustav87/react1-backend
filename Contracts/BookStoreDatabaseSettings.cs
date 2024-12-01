@@ -1,4 +1,4 @@
-namespace React1_backend.Contracts;
+namespace React1_Backend.Contracts;
 
 public class BookStoreDatabaseSettings
 {

@@ -1,6 +1,6 @@
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 
-namespace React1_backend.S3;
+namespace React1_Backend.S3;
 
 public interface IS3Service
 {

@@ -1,8 +1,8 @@
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace React1_backend.Services;
+namespace React1_Backend.Services;
 
 public class BooksService
 {

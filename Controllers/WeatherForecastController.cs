@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace React1_backend.Controllers;
+namespace React1_Backend.Controllers;
 
 [ApiController]
 [Route("[controller]")]

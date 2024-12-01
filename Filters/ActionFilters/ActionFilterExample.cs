@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace React1_backend.Filters.ActionFilters;
+namespace React1_Backend.Filters.ActionFilters;
 
 public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IActionFilter
 {

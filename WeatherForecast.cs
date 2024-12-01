@@ -1,4 +1,4 @@
-namespace React1_backend;
+namespace React1_Backend;
 
 public class WeatherForecast
 {

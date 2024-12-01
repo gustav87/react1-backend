@@ -12,7 +12,7 @@ steps:
   displayName: 'Build and push backend'
   inputs:
     containerRegistry: 'gustav87 Docker Hub'
-    repository: 'gustav87/react1-backend'
+    repository: 'gustav87/React1-Backend'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     buildContext: '**'

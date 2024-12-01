@@ -1,8 +1,8 @@
 using System.Net;
 using Aliyun.OSS;
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 
-namespace React1_backend.Alibaba;
+namespace React1_Backend.Alibaba;
 
 public class AlibabaService : IAlibabaService
 {

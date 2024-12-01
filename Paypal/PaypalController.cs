@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using React1_backend.Filters.ActionFilters;
+using React1_Backend.Filters.ActionFilters;
 
-namespace React1_backend.Paypal;
+namespace React1_Backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]

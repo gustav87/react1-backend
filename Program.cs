@@ -1,12 +1,10 @@
-using React1_backend.Filters.ActionFilters;
-using React1_backend.Contracts;
-using React1_backend.Services;
-using React1_backend.Account;
-using React1_backend.S3;
-using React1_backend.Alibaba;
-using React1_backend.Paypal;
-using System.IO.Compression;
-using Microsoft.AspNetCore.ResponseCompression;
+using React1_Backend.Filters.ActionFilters;
+using React1_Backend.Contracts;
+using React1_Backend.Services;
+using React1_Backend.Account;
+using React1_Backend.S3;
+using React1_Backend.Alibaba;
+using React1_Backend.Paypal;
 
 var builder = WebApplication.CreateBuilder(args);
 

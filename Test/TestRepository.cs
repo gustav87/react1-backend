@@ -1,4 +1,4 @@
-namespace React1_backend.Test;
+namespace React1_Backend.Test;
 
 public class TestRepository
 {

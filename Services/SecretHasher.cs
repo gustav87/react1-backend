@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace React1_backend.Account;
+namespace React1_Backend.Account;
 
 /*
 Reference: https://stackoverflow.com/a/73125177

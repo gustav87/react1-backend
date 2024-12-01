@@ -1,9 +1,9 @@
-using React1_backend.Contracts;
+using React1_Backend.Contracts;
 
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
-namespace React1_backend.Account;
+namespace React1_Backend.Account;
 
 public class AccountService
 {
@@ -20,7 +20,7 @@ public class AccountService
         mongoClientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
         mongoClientSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
         var mongoClient = new MongoClient(mongoClientSettings);
-        var mongoDatabase = mongoClient.GetDatabase("react1-backend");
+        var mongoDatabase = mongoClient.GetDatabase("React1-Backend");
         _accountCollection = mongoDatabase.GetCollection<Account>("Account");
     }
 

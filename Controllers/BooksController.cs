@@ -1,9 +1,9 @@
-using React1_backend.Contracts;
-using React1_backend.Services;
+using React1_Backend.Contracts;
+using React1_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using React1_backend.Filters.ActionFilters;
+using React1_Backend.Filters.ActionFilters;
 
-namespace React1_backend.Controllers;
+namespace React1_Backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
