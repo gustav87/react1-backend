@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace React1_Backend.Contracts;
 
 public class GetTokenResponse

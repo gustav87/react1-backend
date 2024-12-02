@@ -5,6 +5,10 @@ using React1_Backend.Account;
 using React1_Backend.S3;
 using React1_Backend.Alibaba;
 using React1_Backend.Paypal;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 

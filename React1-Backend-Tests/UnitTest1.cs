@@ -2,7 +2,7 @@ using React1_Backend.Contracts;
 using React1_Backend.Account;
 namespace React1_Backend_Tests;
 
-public class Tests
+public class UnitTest1
 {
     private AccountService _accountService;
 
