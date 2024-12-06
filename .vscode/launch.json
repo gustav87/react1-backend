@@ -17,8 +17,8 @@
         "alibabaAccessKey": "x",
         "alibabaSecretKey": "x",
         "mongoConnectionString": "mongodb://localhost:27017",
-        "adminToken": "x",
-        "userToken": "x",
+        "adminToken": "adminToken",
+        "userToken": "userToken",
         "paypalClientId": "x",
         "paypalSecretKey": "x"
       }

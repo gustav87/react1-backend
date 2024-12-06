@@ -19,10 +19,6 @@ public class AccountController(ILogger<AccountController> logger, AccountService
     [HttpPost("log-in")]
     public async Task<IActionResult> LogIn([FromBody] Account req)
     {
-        if (_accountService.IsEmpty(req))
-        {
-            return BadRequest("Username or Password cannot be empty.");
-        }
         string token = await _accountService.LogIn(req);
         if (string.IsNullOrEmpty(token))
         {
@@ -32,13 +28,9 @@ public class AccountController(ILogger<AccountController> logger, AccountService
         return Ok(token);
     }
 
-    [HttpPost("create-account")]
-    public async Task<IActionResult> CreateAccount([FromBody] Account req)
+    [HttpPost("sign-up")]
+    public async Task<IActionResult> SignUp([FromBody] SignUpData req)
     {
-        if (_accountService.IsEmpty(req))
-        {
-            return BadRequest("Username or Password cannot be empty.");
-        }
         try
         {
             List<Account> numberOfAccounts = await _accountService.GetAsync();
@@ -56,7 +48,14 @@ public class AccountController(ILogger<AccountController> logger, AccountService
         }
         catch (MongoWriteException ex)
         {
-            Console.WriteLine(ex.Message);
+            return StatusCode(503, $"Error: {ex.Message}");
+        }
+        catch (TimeoutException)
+        {
+            return StatusCode(503, "Unable to connect to database.");
+        }
+        catch (Exception)
+        {
             return StatusCode(503, "Something went wrong.");
         }
     }

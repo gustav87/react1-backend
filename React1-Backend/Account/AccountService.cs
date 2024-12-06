@@ -2,6 +2,7 @@ using MongoDB.Driver;
 using React1_Backend.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace React1_Backend.Account;
@@ -35,7 +36,7 @@ public class AccountService
         return "";
     }
 
-    public async Task CreateAccount(Account req)
+    public async Task CreateAccount(SignUpData req)
     {
         Account hashedAccount = new Account() { Username = req.Username, Password = SecretHasher.Hash(req.Password) };
         await _accountCollection.InsertOneAsync(hashedAccount);

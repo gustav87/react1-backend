@@ -1,14 +1,14 @@
-using React1_Backend.Filters.ActionFilters;
-using React1_Backend.Contracts;
-using React1_Backend.Services;
-using React1_Backend.Account;
-using React1_Backend.S3;
-using React1_Backend.Alibaba;
-using React1_Backend.Paypal;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using React1_Backend.Account;
+using React1_Backend.Alibaba;
+using React1_Backend.Contracts;
+using React1_Backend.Filters.ActionFilters;
+using React1_Backend.Paypal;
+using React1_Backend.S3;
+using React1_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

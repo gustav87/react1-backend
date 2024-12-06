@@ -1,15 +1,12 @@
 using React1_Backend.Contracts;
-using React1_Backend.Account;
 namespace React1_Backend_Tests;
 
-public class UnitTest1
+[TestFixture]
+public class BasicTests
 {
-    private AccountService _accountService;
-
     [SetUp]
     public void Setup()
     {
-        _accountService = new AccountService();
     }
 
     [Test]
@@ -35,16 +32,5 @@ public class UnitTest1
         CloudFile cloudFile = new();
         Assert.IsNotNull(cloudFile);
         Assert.That(cloudFile, Is.Not.Null);
-    }
-
-    [Test]
-    public void TestLoginIsEmpty()
-    {
-        Account account = new();
-        Assert.That(_accountService.IsEmpty(account), Is.True);
-        account.Username = "fish";
-        Assert.That(_accountService.IsEmpty(account), Is.True);
-        account.Password = "cheese";
-        Assert.That(_accountService.IsEmpty(account), Is.False);
     }
 }
