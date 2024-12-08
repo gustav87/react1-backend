@@ -12,6 +12,9 @@ public class ContactService
     private readonly string mailgunApiKey = Environment.GetEnvironmentVariable("mailgunApiKey") ?? "";
     private readonly HttpClient _httpClient;
     private readonly string _mailgunUrl;
+    private readonly string _domain;
+    private readonly string _to = "to=gustav87and@gmail.com";
+    private readonly string _subject = "subject=Message from react1 website";
 
     public ContactService(IHttpClientFactory httpClientFactory)
     {
@@ -20,18 +23,16 @@ public class ContactService
         string authorizationBase64 = Convert.ToBase64String(authorizationBytes);
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
         _mailgunUrl = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
+        _domain = $"domain={mailgunDomain}";
     }
 
     public async Task SendMail(ContactData contactData)
     {
         var request = new HttpRequestMessage(HttpMethod.Post, _mailgunUrl);
 
-        string domain = $"domain={mailgunDomain}";
         string from = $"from=React1 Website <{contactData.Email}>";
-        string to = "to=gustav87and@gmail.com";
-        string subject = "subject=Message from react1 website";
         string msg = $"text=Name: {contactData.Name} \nEmail: {contactData.Email} \nMessage: {contactData.Message}";
-        string body = $"{domain}&{from}&{to}&{subject}&{msg}";
+        string body = $"{_domain}&{from}&{_to}&{_subject}&{msg}";
 
         var httpcontent = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
         request.Content = httpcontent;

@@ -25,7 +25,8 @@ public class ContactController(ILogger<ContactController> logger) : ControllerBa
 
         byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{mailgunApiKey}");
         string authorizationBase64 = Convert.ToBase64String(authorizationBytes);
-        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
+        // httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
 
         string domain = $"domain={mailgunDomain}";
         string from = $"from=React1 Website <{req.Email}>";
