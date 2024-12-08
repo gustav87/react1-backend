@@ -12,15 +12,17 @@
       "stopAtEntry": false,
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "awsAccessKey": "x",
-        "awsSecretKey": "x",
-        "alibabaAccessKey": "x",
-        "alibabaSecretKey": "x",
+        "awsAccessKey": "awsAccessKey",
+        "awsSecretKey": "awsSecretKey",
+        "alibabaAccessKey": "alibabaAccessKey",
+        "alibabaSecretKey": "alibabaSecretKey",
         "mongoConnectionString": "mongodb://localhost:27017",
         "adminToken": "adminToken",
         "userToken": "userToken",
-        "paypalClientId": "x",
-        "paypalSecretKey": "x"
+        "paypalClientId": "paypalClientId",
+        "paypalSecretKey": "paypalSecretKey",
+        "mailgunDomain": "mailgunDomain",
+        "mailgunApiKey": "mailgunApiKey",
       }
     },
     {

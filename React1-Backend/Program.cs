@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using React1_Backend.Account;
 using React1_Backend.Alibaba;
+using React1_Backend.Contact;
 using React1_Backend.Contracts;
 using React1_Backend.Filters.ActionFilters;
 using React1_Backend.Paypal;
@@ -16,6 +17,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ActionFilterExample>();
 builder.Services.AddScoped<AsyncAdminTokenFilter>();
+
+// Add the System.Net.Http.IHttpClientFactory and related services to the IServiceCollection
+builder.Services.AddHttpClient();
 
 // builder.Services.AddResponseCompression(options =>
 // {
@@ -37,6 +41,7 @@ builder.Services.AddSingleton<AccountService>();
 builder.Services.AddSingleton<S3Service>();
 builder.Services.AddSingleton<AlibabaService>();
 builder.Services.AddSingleton<PaypalService>();
+builder.Services.AddSingleton<ContactService>();
 
 // Add Swagger. Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
