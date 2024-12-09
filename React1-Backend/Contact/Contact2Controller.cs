@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +10,7 @@ namespace React1_Backend.Contact;
 
 [ApiController]
 [Route("api/[controller]")]
-public class Contact2Controller(ILogger<ContactController> logger, ContactService contactService) : ControllerBase
+public class Contact2Controller(ILogger<ContactController> logger, ContactService contactService, [FromServices] IValidator<ContactData> validator) : ControllerBase
 {
     private readonly ILogger<ContactController> _logger = logger;
     private readonly ContactService _contactService = contactService;
@@ -16,6 +18,9 @@ public class Contact2Controller(ILogger<ContactController> logger, ContactServic
     [HttpPost]
     public async Task<IActionResult> SendMail([FromBody] ContactData req)
     {
+        ValidationResult validationResult = validator.Validate(req);
+        if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
+
         try
         {
             await _contactService.SendMail(req);

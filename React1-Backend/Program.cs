@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,9 @@ builder.Services.AddHttpClient();
 
 // Add controllers
 builder.Services.AddControllers();
+
+// Add FluentValidation.AspNetCore
+builder.Services.AddValidatorsFromAssemblyContaining<ContactValidator>();
 
 // Add BookStore MongoDB
 builder.Services.Configure<BookStoreDatabaseSettings>(builder.Configuration.GetSection("BookStoreDatabase"));

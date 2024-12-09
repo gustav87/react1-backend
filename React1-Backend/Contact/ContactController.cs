@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,8 +19,11 @@ public class ContactController(ILogger<ContactController> logger) : ControllerBa
     private readonly string mailgunApiKey = Environment.GetEnvironmentVariable("mailgunApiKey") ?? "";
 
     [HttpPost]
-    public async Task<IActionResult> SendMail([FromBody] ContactData req)
+    public async Task<IActionResult> SendMail([FromBody] ContactData req, [FromServices] IValidator<ContactData> validator)
     {
+        ValidationResult validationResult = validator.Validate(req);
+        if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
+
         string url = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
         var httpClient = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, url);

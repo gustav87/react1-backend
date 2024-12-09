@@ -15,23 +15,26 @@ public class Account
 
 public class SignUpData
 {
-    [Required(ErrorMessage = "Username is required.")]
-    [RegularExpression(@"^[a-zA-Z0-9]{2,30}$", ErrorMessage = "Username must be between 2 and 30 alphanumeric characters.")]
+    [Required(ErrorMessage = "{0} is required.")]
+    [RegularExpression(@"^[a-zA-Z0-9]{2,30}$", ErrorMessage = "{0} must be between 2 and 30 alphanumeric characters.")]
     public string Username { get; set; }
 
-    [Required(ErrorMessage = "Password is required.")]
-    [StringLength(30, ErrorMessage = "Password exceeds maximum length of 30 characters.")]
+    [Required(ErrorMessage = "{0} is required.")]
+    [StringLength(30, MinimumLength = 3, ErrorMessage = "{0} must been between {1} and {2} characters.")]
     public string Password { get; set; }
 
-    [Required(ErrorMessage = "Favorite animal is required.")]
-    [StringLength(30, ErrorMessage = "Favorite animal exceeds maximum length of 30 characters.")]
+    [Required(ErrorMessage = "{0} is required.")]
+    [StringLength(30, ErrorMessage = "{0} exceeds maximum length of {1} characters.")]
+    [Display(Name = "Favorite animal")]
     public string FavoriteAnimal { get; set; }
 
-    [Required(ErrorMessage = "Favorite color is required.")]
+    [Required(ErrorMessage = "{0} is required.")]
     [FavoriteColorValidation]
+    [Display(Name = "Favorite color")]
     public string FavoriteColor { get; set; }
 
-    [Required(ErrorMessage = "Favorite number is required.")]
+    [Required(ErrorMessage = "{0} is required.")]
     [Range(0, int.MaxValue, ErrorMessage = "Please enter a non-negative integer.")]
-    public int FavoriteNumber { get; set; }
+    [Display(Name = "Favorite number")]
+    public int? FavoriteNumber { get; set; }
 }
