@@ -122,9 +122,9 @@ public class LoginTests
     }
 
     private static List<ValidationResult> ValidateModel<T>(T model) {
-        var context = new ValidationContext(model, null, null);
+        var context = new ValidationContext(model);
         var result = new List<ValidationResult>();
-        _ = Validator.TryValidateObject(model, context, result, true);
+        bool isValid = Validator.TryValidateObject(model, context, result, true);
         return result;
     }
 }
