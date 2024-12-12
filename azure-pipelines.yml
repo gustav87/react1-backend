@@ -27,9 +27,10 @@ steps:
 
 # Check formatting.
 - task: DotNetCoreCLI@2
-  displayName: Run dotnet format --verify-no-changes
+  displayName: Run dotnet format
   inputs:
-    command: 'format --verify-no-changes'
+    command: 'custom'
+    arguments: 'format --verify-no-changes'
 
 # Run tests and auto publish test results.
 - task: DotNetCoreCLI@2
