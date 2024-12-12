@@ -25,6 +25,12 @@ steps:
   inputs:
     command: 'build'
 
+# Check formatting.
+- task: DotNetCoreCLI@2
+  displayName: Run dotnet format --verify-no-changes
+  inputs:
+    command: 'format --verify-no-changes'
+
 # Run tests and auto publish test results.
 - task: DotNetCoreCLI@2
   displayName: Run dotnet test
