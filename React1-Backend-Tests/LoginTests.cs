@@ -122,7 +122,8 @@ public class LoginTests
         Assert.That(results, Has.Count.EqualTo(0));
     }
 
-    private static List<ValidationResult> ValidateModel<T>(T model) {
+    private static List<ValidationResult> ValidateModel<T>(T model)
+    {
         var context = new ValidationContext(model);
         var result = new List<ValidationResult>();
         bool isValid = Validator.TryValidateObject(model, context, result, true);
