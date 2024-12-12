@@ -30,7 +30,8 @@ steps:
   displayName: Run dotnet format
   inputs:
     command: 'custom'
-    arguments: 'format --verify-no-changes'
+    custom: 'format'
+    arguments: '--verify-no-changes --verbosity diagnostic'
 
 # Run tests and auto publish test results.
 - task: DotNetCoreCLI@2
