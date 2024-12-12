@@ -1,18 +1,16 @@
-using React1_Backend.Account;
 using React1_Backend.Contact;
 using FluentValidation.TestHelper;
+
 namespace React1_Backend_Tests;
 
 [TestFixture]
 public class ContactTests
 {
-    private AccountService _accountService;
     private ContactValidator validator;
 
     [SetUp]
     public void Setup()
     {
-        _accountService = new AccountService();
         validator = new ContactValidator();
     }
 
@@ -34,5 +32,41 @@ public class ContactTests
         result.ShouldHaveValidationErrorFor(x => x.Name);
         result.ShouldHaveValidationErrorFor(x => x.Email);
         result.ShouldNotHaveValidationErrorFor(x => x.Message);
+    }
+
+    [Test]
+    public void ContactData_Message_Too_Short()
+    {
+        // Arrange
+        ContactData model = new()
+        {
+            Name = "hi",
+            Email = "a@b.com",
+            Message = "hello!",
+        };
+
+        // Act
+        var result = validator.TestValidate(model);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(x => x.Message);
+    }
+
+    [Test]
+    public void ContactData_Is_Valid()
+    {
+        // Arrange
+        ContactData model = new()
+        {
+            Name = "hi",
+            Email = "a@b.com",
+            Message = "hello there!",
+        };
+
+        // Act
+        var result = validator.TestValidate(model);
+
+        // Assert
+        result.ShouldNotHaveAnyValidationErrors();
     }
 }
