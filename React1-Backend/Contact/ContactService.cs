@@ -10,13 +10,14 @@ public class ContactService
 {
     private readonly string mailgunDomain = Environment.GetEnvironmentVariable("mailgunDomain") ?? "";
     private readonly string mailgunApiKey = Environment.GetEnvironmentVariable("mailgunApiKey") ?? "";
+    private readonly ContactRepository _contactRepository;
     private readonly HttpClient _httpClient;
     private readonly string _mailgunUrl;
     private readonly string _domain;
     private readonly string _to = "to=gustav87and@gmail.com";
     private readonly string _subject = "subject=Message from react1 website";
 
-    public ContactService(IHttpClientFactory httpClientFactory)
+    public ContactService(IHttpClientFactory httpClientFactory, ContactRepository contactRepository)
     {
         _httpClient = httpClientFactory.CreateClient();
         byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{mailgunApiKey}");
@@ -24,6 +25,8 @@ public class ContactService
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
         _mailgunUrl = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
         _domain = $"domain={mailgunDomain}";
+
+        _contactRepository = contactRepository;
     }
 
     public async Task SendMail(ContactData contactData)
@@ -43,5 +46,11 @@ public class ContactService
             string content = await response.Content.ReadAsStringAsync();
             throw new HttpRequestException(content, null, response.StatusCode);
         }
+    }
+
+    public async Task InsertIntoDb(ContactData contactData)
+    {
+        var mail = new Mail(contactData);
+        await _contactRepository.Insert(mail);
     }
 }

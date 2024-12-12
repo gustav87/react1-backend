@@ -20,7 +20,7 @@ public class AccountService
         mongoClientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
         mongoClientSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
         var mongoClient = new MongoClient(mongoClientSettings);
-        var mongoDatabase = mongoClient.GetDatabase("React1-Backend");
+        IMongoDatabase mongoDatabase = mongoClient.GetDatabase("React1-Backend");
         _accountCollection = mongoDatabase.GetCollection<Account>("Account");
     }
 

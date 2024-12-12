@@ -2,6 +2,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -24,15 +25,20 @@ public class Contact2Controller(ILogger<ContactController> logger, ContactServic
         try
         {
             await _contactService.SendMail(req);
+            await _contactService.InsertIntoDb(req);
         }
         catch (HttpRequestException ex)
         {
             int statusCode = (int)ex.StatusCode;
             return StatusCode(statusCode, $"Error {statusCode}: {ex.Message}");
         }
+        catch (MongoWriteException ex)
+        {
+            return StatusCode(503, $"Error: {ex.Message}");
+        }
         catch (Exception ex)
         {
-            StatusCode(503, ex.Message);
+            return StatusCode(503, ex.Message);
         }
         return Ok();
     }

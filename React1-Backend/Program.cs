@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Driver;
 using React1_Backend.Account;
 using React1_Backend.Alibaba;
 using React1_Backend.Contact;
@@ -11,17 +12,19 @@ using React1_Backend.Filters.ActionFilters;
 using React1_Backend.Paypal;
 using React1_Backend.S3;
 using React1_Backend.Services;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped<ActionFilterExample>();
-builder.Services.AddScoped<AsyncAdminTokenFilter>();
+// Add the Microsoft.AspNetCore.Http.HttpContextAccessor service as a singleton.
+// .AddHttpContextAccessor() is equivalent to using .AddSingleton(), shown commented out below.
+builder.Services.AddHttpContextAccessor();
+// builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 // Add the System.Net.Http.IHttpClientFactory and related services to the IServiceCollection
 builder.Services.AddHttpClient();
 
+// Add compression
 // builder.Services.AddResponseCompression(options =>
 // {
 //     options.EnableForHttps = true;
@@ -33,19 +36,32 @@ builder.Services.AddControllers();
 // Add FluentValidation.AspNetCore
 builder.Services.AddValidatorsFromAssemblyContaining<ContactValidator>();
 
-// Add BookStore MongoDB
+// Add BooksService with MongoDB
 builder.Services.Configure<BookStoreDatabaseSettings>(builder.Configuration.GetSection("BookStoreDatabase"));
 builder.Services.AddSingleton<BooksService>();
 
-// Add Account MongoDB
+// Add AccountService with MongoDB
 builder.Services.Configure<AccountDatabaseSettings>(builder.Configuration.GetSection("AccountDatabase"));
 builder.Services.AddSingleton<AccountService>();
+
+// Configure and add MongoDB service
+string mongoConnectionString = Environment.GetEnvironmentVariable("mongoConnectionString") ?? "mongodb://localhost:27017";
+MongoClientSettings mongoSettings = MongoClientSettings.FromConnectionString(mongoConnectionString.Replace("'", ""));
+mongoSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
+mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
+var mongoClient = new MongoClient(mongoSettings);
+builder.Services.AddSingleton(mongoClient);
 
 // Add services
 builder.Services.AddSingleton<S3Service>();
 builder.Services.AddSingleton<AlibabaService>();
 builder.Services.AddSingleton<PaypalService>();
 builder.Services.AddSingleton<ContactService>();
+builder.Services.AddScoped<ActionFilterExample>();
+builder.Services.AddScoped<AsyncAdminTokenFilter>();
+
+// Add repositories
+builder.Services.AddSingleton<ContactRepository>();
 
 // Add Swagger. Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
