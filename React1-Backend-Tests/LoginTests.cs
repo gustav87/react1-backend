@@ -1,9 +1,10 @@
+using Moq;
+using MongoDB.Driver;
 using React1_Backend.Account;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Moq;
 
 namespace React1_Backend_Tests;
 
@@ -11,11 +12,13 @@ namespace React1_Backend_Tests;
 public class LoginTests
 {
     private AccountService _accountService;
+    protected readonly MongoClient MongoClient = new("mongodb://localhost:27017");
 
     [SetUp]
     public void Setup()
     {
-        _accountService = new AccountService();
+        AccountRepository accountRepository = new();
+        _accountService = new AccountService(accountRepository);
     }
 
     [Test]
@@ -143,10 +146,10 @@ public class LoginTests
 
         // Here we're telling the accountService mock that if its GetAsync method is invoked with this specific username, return the 'expected' Account.
         // If it gets invoked with any other username, fail the test immediately (this is what MockBehavior.Strict does).
-        accountService.Setup(x => x.GetAsync(username)).ReturnsAsync(expected);
+        accountService.Setup(x => x.GetAsyncByUsername(username)).ReturnsAsync(expected);
 
         // Act
-        Account actual = await accountService.Object.GetAsync(username);
+        Account actual = await accountService.Object.GetAsyncByUsername(username);
 
         // Assert
         Assert.That(actual, Is.Not.Null);
@@ -162,10 +165,12 @@ public class LoginTests
         string username = "adam";
         Account propertyChanged = Mock.Of<Account>(x => x.Username == username);
         propertyChanged.Admin = true;
-        accountService.Setup(x => x.GetAsync(username)).ReturnsAsync(propertyChanged);
+
+        // accountService.Setup(x => x.GetAsyncByUsername(username)).ReturnsAsync(propertyChanged);
+        accountService.Setup(x => x.GetAsyncByUsername(username).Result).Returns(propertyChanged); // Equivalent to commented out line above.
 
         // Act
-        Account actual = await accountService.Object.GetAsync(username);
+        Account actual = await accountService.Object.GetAsyncByUsername(username);
 
         // Assert
         Assert.That(actual.Admin, Is.True);

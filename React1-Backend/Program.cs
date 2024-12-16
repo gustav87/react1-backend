@@ -52,16 +52,19 @@ mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
 var mongoClient = new MongoClient(mongoSettings);
 builder.Services.AddSingleton(mongoClient);
 
-// Add services
+// Add singleton services
 builder.Services.AddSingleton<S3Service>();
 builder.Services.AddSingleton<AlibabaService>();
 builder.Services.AddSingleton<PaypalService>();
 builder.Services.AddSingleton<ContactService>();
+
+// Add scoped or transient services
 builder.Services.AddScoped<ActionFilterExample>();
 builder.Services.AddScoped<AsyncAdminTokenFilter>();
 
 // Add repositories
 builder.Services.AddSingleton<ContactRepository>();
+builder.Services.AddSingleton<AccountRepository>();
 
 // Add Swagger. Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

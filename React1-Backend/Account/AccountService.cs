@@ -1,4 +1,3 @@
-using MongoDB.Driver;
 using React1_Backend.Services;
 using System;
 using System.Collections.Generic;
@@ -6,28 +5,16 @@ using System.Threading.Tasks;
 
 namespace React1_Backend.Account;
 
-public class AccountService : IAccountService
+public class AccountService(AccountRepository accountRepository) : IAccountService
 {
-    private readonly IMongoCollection<Account> _accountCollection;
+    private readonly AccountRepository _accountRepository = accountRepository;
     private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";
     private readonly string userToken = Environment.GetEnvironmentVariable("userToken") ?? "";
-
-    public AccountService()
-    {
-        string mongoConnectionString = Environment.GetEnvironmentVariable("mongoConnectionString") ?? "mongodb://localhost:27017";
-
-        MongoClientSettings mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
-        mongoClientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
-        mongoClientSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
-        var mongoClient = new MongoClient(mongoClientSettings);
-        IMongoDatabase mongoDatabase = mongoClient.GetDatabase("React1-Backend");
-        _accountCollection = mongoDatabase.GetCollection<Account>("Account");
-    }
 
     public async Task<string> LogIn(Account req)
     {
         Console.WriteLine($"Log in attempt from {req.Username}.");
-        Account res = await GetAsyncByUsername(req.Username);
+        Account res = await _accountRepository.GetAsyncByUsername(req.Username);
         if (res != null && SecretHasher.Verify(req.Password, res.Password))
         {
             return res.Admin ? adminToken : userToken;
@@ -38,26 +25,18 @@ public class AccountService : IAccountService
     public async Task CreateAccount(SignUpData req)
     {
         Account hashedAccount = new() { Username = req.Username, Password = SecretHasher.Hash(req.Password) };
-        await _accountCollection.InsertOneAsync(hashedAccount);
+        await _accountRepository.CreateAsync(hashedAccount);
     }
 
-    public async Task<List<Account>> GetAsync() =>
-      await _accountCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Account>> GetAsync()
+    {
+        return await _accountRepository.GetAsync();
+    }
 
-    public async Task<Account> GetAsync(string id) =>
-        await _accountCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-
-    public async Task<Account> GetAsyncByUsername(string username) =>
-        await _accountCollection.Find(x => x.Username == username).FirstOrDefaultAsync();
-
-    public async Task CreateAsync(Account account) =>
-        await _accountCollection.InsertOneAsync(account);
-
-    public async Task UpdateAsync(string id, Account updatedAccount) =>
-        await _accountCollection.ReplaceOneAsync(x => x.Id == id, updatedAccount);
-
-    public async Task RemoveAsync(string id) =>
-        await _accountCollection.DeleteOneAsync(x => x.Id == id);
+    public async Task<Account> GetAsyncByUsername(string username)
+    {
+        return await _accountRepository.GetAsyncByUsername(username);
+    }
 
     public bool IsEmpty(Account account)
     {
