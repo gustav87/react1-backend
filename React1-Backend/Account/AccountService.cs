@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace React1_Backend.Account;
 
-public class AccountService
+public class AccountService : IAccountService
 {
     private readonly IMongoCollection<Account> _accountCollection;
     private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";
@@ -37,7 +37,7 @@ public class AccountService
 
     public async Task CreateAccount(SignUpData req)
     {
-        Account hashedAccount = new Account() { Username = req.Username, Password = SecretHasher.Hash(req.Password) };
+        Account hashedAccount = new() { Username = req.Username, Password = SecretHasher.Hash(req.Password) };
         await _accountCollection.InsertOneAsync(hashedAccount);
     }
 

@@ -2,6 +2,8 @@ using React1_Backend.Account;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Moq;
 
 namespace React1_Backend_Tests;
 
@@ -128,5 +130,44 @@ public class LoginTests
         var result = new List<ValidationResult>();
         bool isValid = Validator.TryValidateObject(model, context, result, true);
         return result;
+    }
+
+    [Test]
+    [TestCase("mike")]
+    [TestCase("jane")]
+    public async Task Sign_Up_GetAsync(string username)
+    {
+        // Arrange
+        Mock<IAccountService> accountService = new(MockBehavior.Strict);
+        Account expected = new() { Username = username, Password = "asdf", Admin = false };
+
+        // Here we're telling the accountService mock that if its GetAsync method is invoked with this specific username, return the 'expected' Account.
+        // If it gets invoked with any other username, fail the test immediately (this is what MockBehavior.Strict does).
+        accountService.Setup(x => x.GetAsync(username)).ReturnsAsync(expected);
+
+        // Act
+        Account actual = await accountService.Object.GetAsync(username);
+
+        // Assert
+        Assert.That(actual, Is.Not.Null);
+        Assert.That(actual, Is.SameAs(expected));
+        Assert.That(actual.Admin, Is.False);
+    }
+
+    [Test]
+    public async Task Sign_Up_Admin_Property_Changed()
+    {
+        // Arrange
+        Mock<IAccountService> accountService = new(MockBehavior.Strict);
+        string username = "adam";
+        Account propertyChanged = Mock.Of<Account>(x => x.Username == username);
+        propertyChanged.Admin = true;
+        accountService.Setup(x => x.GetAsync(username)).ReturnsAsync(propertyChanged);
+
+        // Act
+        Account actual = await accountService.Object.GetAsync(username);
+
+        // Assert
+        Assert.That(actual.Admin, Is.True);
     }
 }
