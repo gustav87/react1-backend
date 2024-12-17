@@ -161,16 +161,16 @@ public class LoginTests
     public async Task Sign_Up_Admin_Property_Changed()
     {
         // Arrange
-        Mock<IAccountService> accountService = new(MockBehavior.Strict);
+        Mock<IAccountService> accountServiceMock = new(MockBehavior.Strict);
         string username = "adam";
         Account propertyChanged = Mock.Of<Account>(x => x.Username == username);
         propertyChanged.Admin = true;
 
-        // accountService.Setup(x => x.GetAsyncByUsername(username)).ReturnsAsync(propertyChanged);
-        accountService.Setup(x => x.GetAsyncByUsername(username).Result).Returns(propertyChanged); // Equivalent to commented out line above.
+        // accountServiceMock.Setup(x => x.GetAsyncByUsername(username)).ReturnsAsync(propertyChanged);
+        accountServiceMock.Setup(x => x.GetAsyncByUsername(username).Result).Returns(propertyChanged); // Equivalent to commented out line above.
 
         // Act
-        Account actual = await accountService.Object.GetAsyncByUsername(username);
+        Account actual = await accountServiceMock.Object.GetAsyncByUsername(username);
 
         // Assert
         Assert.That(actual.Admin, Is.True);
