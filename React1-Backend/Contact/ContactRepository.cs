@@ -10,7 +10,7 @@ public class ContactRepository
     public ContactRepository(MongoClient mongoClient)
     {
         IMongoDatabase mongoDatabase = mongoClient.GetDatabase("React1-Backend");
-        _mailCollection = mongoDatabase.GetCollection<Mail>("Mail");
+        _mailCollection = mongoDatabase.GetCollection<Mail>(nameof(Mail));
     }
 
     public async Task Insert(Mail mail) => await _mailCollection.InsertOneAsync(mail);

@@ -36,6 +36,20 @@
         "${workspaceFolder}/React1-Backend.sln"
       ],
       "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "unit tests",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "test",
+        "React1-Backend-Tests"
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
     }
   ]
 }

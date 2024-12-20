@@ -12,12 +12,12 @@ namespace React1_Backend_Tests;
 public class LoginTests
 {
     private AccountService _accountService;
-    protected readonly MongoClient MongoClient = new("mongodb://localhost:27017");
+    protected readonly MongoClient _mongoClient = new("mongodb://localhost:27017");
 
     [SetUp]
     public void Setup()
     {
-        AccountRepository accountRepository = new();
+        AccountRepository accountRepository = new(_mongoClient);
         _accountService = new AccountService(accountRepository);
     }
 

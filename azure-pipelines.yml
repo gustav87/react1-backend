@@ -7,27 +7,27 @@ pool:
 steps:
 # Use specific .NET version
 - task: UseDotNet@2
-  displayName: Use .NET 8.0 SDK
+  displayName: use .NET 8.0 SDK
   inputs:
     packageType: 'sdk'
     version: '8.0.x'
 
 # Restore project
 - task: DotNetCoreCLI@2
-  displayName: Run dotnet restore
+  displayName: dotnet restore
   inputs:
     command: 'restore'
     feedsToUse: 'select'
 
 # Build project
 - task: DotNetCoreCLI@2
-  displayName: Run dotnet build
+  displayName: dotnet build
   inputs:
     command: 'build'
 
 # Check formatting.
 - task: DotNetCoreCLI@2
-  displayName: Run dotnet format
+  displayName: dotnet format
   inputs:
     command: 'custom'
     custom: 'format'
@@ -35,13 +35,20 @@ steps:
 
 # Run tests and auto publish test results.
 - task: DotNetCoreCLI@2
-  displayName: Run dotnet test
+  displayName: run unit tests
   inputs:
     command: 'test'
+    arguments: 'React1-Backend-Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: run integration tests
+  inputs:
+    command: 'test'
+    arguments: 'React1-Backend-IntegrationTests'
 
 # Build Docker image from Dockerfile and push to Dockerhub
 - task: Docker@2
-  displayName: 'Build and push backend'
+  displayName: 'build and push backend'
   inputs:
     containerRegistry: 'gustav87 Docker Hub'
     repository: 'gustav87/React1-Backend'
