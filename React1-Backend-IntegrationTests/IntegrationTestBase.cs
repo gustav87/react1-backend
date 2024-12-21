@@ -13,7 +13,7 @@ public class IntegrationTestBase
     [SetUp]
     public async Task Setup()
     {
-        MongoClientSettings mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+        MongoClientSettings mongoClientSettings = MongoClientSettings.FromConnectionString($"mongodb://{mongoConnectionString}:27020");
         mongoClientSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
         mongoClientSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
         _mongoClient = new MongoClient(mongoClientSettings);
