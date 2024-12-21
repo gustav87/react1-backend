@@ -40,13 +40,13 @@ steps:
     command: 'test'
     arguments: 'React1-Backend-Tests'
 
-# - task: DotNetCoreCLI@2
-#   displayName: run integration tests
-#   env:
-#     MONGO_CONNECTION_STRING: $(MONGO_CONNECTION_STRING)
-#   inputs:
-#     command: 'test'
-#     arguments: 'React1-Backend-IntegrationTests'
+- task: DotNetCoreCLI@2
+  displayName: run integration tests
+  env:
+    MONGO_CONNECTION_STRING: $(MONGO_CONNECTION_STRING)
+  inputs:
+    command: 'test'
+    arguments: 'React1-Backend-IntegrationTests'
 
 # Build Docker image from Dockerfile and push to Dockerhub
 - task: Docker@2
