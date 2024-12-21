@@ -18,7 +18,7 @@ public class BasicTests
     [Test]
     public void TestStartsWithA()
     {
-        string[] words = ["Alphabet", "Aebra", "ABC"];
+        string[] words = ["Alphabet", "Aebra", "ABCD"];
         foreach (string word in words)
         {
             bool result = word.StartsWith('A');
