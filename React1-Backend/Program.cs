@@ -45,8 +45,8 @@ builder.Services.Configure<AccountDatabaseSettings>(builder.Configuration.GetSec
 builder.Services.AddSingleton<AccountService>();
 
 // Configure and add MongoDB service
-string mongoConnectionString = Environment.GetEnvironmentVariable("mongoConnectionString") ?? "mongodb://localhost:27017";
-MongoClientSettings mongoSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
+string MONGO_CONNECTION_STRING = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING") ?? "mongodb://localhost:27017";
+MongoClientSettings mongoSettings = MongoClientSettings.FromConnectionString(MONGO_CONNECTION_STRING);
 mongoSettings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
 mongoSettings.ConnectTimeout = TimeSpan.FromSeconds(5);
 var mongoClient = new MongoClient(mongoSettings);

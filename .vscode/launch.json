@@ -16,7 +16,7 @@
         "awsSecretKey": "awsSecretKey",
         "alibabaAccessKey": "alibabaAccessKey",
         "alibabaSecretKey": "alibabaSecretKey",
-        "mongoConnectionString": "mongodb://localhost:27017",
+        "MONGO_CONNECTION_STRING": "mongodb://localhost:27017",
         "adminToken": "adminToken",
         "userToken": "userToken",
         "paypalClientId": "paypalClientId",
