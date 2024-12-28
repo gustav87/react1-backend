@@ -43,7 +43,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: run integration tests
   env:
-    MONGO_CONNECTION_STRING: $(MONGO_CONNECTION_STRING)
+    MONGO_CONNECTION_STRING_INTTEST: $(MONGO_CONNECTION_STRING_INTTEST)
   inputs:
     command: 'test'
     arguments: 'React1-Backend-IntegrationTests'
