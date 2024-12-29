@@ -15,8 +15,8 @@ namespace React1_Backend.Contact;
 public class ContactController(ILogger<ContactController> logger) : ControllerBase
 {
     private readonly ILogger<ContactController> _logger = logger;
-    private readonly string mailgunDomain = Environment.GetEnvironmentVariable("mailgunDomain") ?? "";
-    private readonly string mailgunApiKey = Environment.GetEnvironmentVariable("mailgunApiKey") ?? "";
+    private readonly string MAILGUN_DOMAIN = Environment.GetEnvironmentVariable("MAILGUN_DOMAIN") ?? "";
+    private readonly string MAILGUN_API_KEY = Environment.GetEnvironmentVariable("MAILGUN_API_KEY") ?? "";
 
     [HttpPost]
     public async Task<IActionResult> SendMail([FromBody] ContactData req, [FromServices] IValidator<ContactData> validator)
@@ -24,16 +24,16 @@ public class ContactController(ILogger<ContactController> logger) : ControllerBa
         ValidationResult validationResult = validator.Validate(req);
         if (!validationResult.IsValid) return BadRequest(validationResult.Errors);
 
-        string url = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
+        string url = $"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages";
         var httpClient = new HttpClient();
         var request = new HttpRequestMessage(HttpMethod.Post, url);
 
-        byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{mailgunApiKey}");
+        byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{MAILGUN_API_KEY}");
         string authorizationBase64 = Convert.ToBase64String(authorizationBytes);
         // httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
         request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
 
-        string domain = $"domain={mailgunDomain}";
+        string domain = $"domain={MAILGUN_DOMAIN}";
         string from = $"from=React1 Website <{req.Email}>";
         string to = "to=gustav87and@gmail.com";
         string subject = "subject=Message from react1 website";

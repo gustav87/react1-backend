@@ -8,8 +8,8 @@ namespace React1_Backend.Account;
 public class AccountService(AccountRepository accountRepository) : IAccountService
 {
     private readonly AccountRepository _accountRepository = accountRepository;
-    private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";
-    private readonly string userToken = Environment.GetEnvironmentVariable("userToken") ?? "";
+    private readonly string ADMIN_TOKEN = Environment.GetEnvironmentVariable("ADMIN_TOKEN") ?? "";
+    private readonly string USER_TOKEN = Environment.GetEnvironmentVariable("USER_TOKEN") ?? "";
 
     public async Task<string> LogIn(Account req)
     {
@@ -17,7 +17,7 @@ public class AccountService(AccountRepository accountRepository) : IAccountServi
         Account res = await _accountRepository.GetAsyncByUsername(req.Username);
         if (res != null && SecretHasher.Verify(req.Password, res.Password))
         {
-            return res.Admin ? adminToken : userToken;
+            return res.Admin ? ADMIN_TOKEN : USER_TOKEN;
         }
         return "";
     }

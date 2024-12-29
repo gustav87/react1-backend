@@ -13,8 +13,8 @@ namespace React1_Backend.Paypal;
 
 public class PaypalService
 {
-    private readonly string paypalClientId = Environment.GetEnvironmentVariable("paypalClientId") ?? "";
-    private readonly string paypalSecretKey = Environment.GetEnvironmentVariable("paypalSecretKey") ?? "";
+    private readonly string PAYPAL_CLIENT_ID = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID") ?? "";
+    private readonly string PAYPAL_SECRET_KEY = Environment.GetEnvironmentVariable("PAYPAL_SECRET_KEY") ?? "";
     private readonly string paypalApiUrl = "https://api-m.paypal.com/v1";
     private string token = "";
 
@@ -82,7 +82,7 @@ public class PaypalService
     {
         string url = $"{paypalApiUrl}/oauth2/token";
         var httpClient = new HttpClient();
-        var authorizationBytes = Encoding.UTF8.GetBytes($"{paypalClientId}:{paypalSecretKey}");
+        var authorizationBytes = Encoding.UTF8.GetBytes($"{PAYPAL_CLIENT_ID}:{PAYPAL_SECRET_KEY}");
         string authorizationBase64 = Convert.ToBase64String(authorizationBytes);
 
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);

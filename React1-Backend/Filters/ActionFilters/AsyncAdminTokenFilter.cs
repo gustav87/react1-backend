@@ -8,7 +8,7 @@ namespace React1_Backend.Filters.ActionFilters;
 public class AsyncAdminTokenFilter : Attribute, IAsyncActionFilter
 {
     public string PermissionName { get; set; }
-    private readonly string adminToken = Environment.GetEnvironmentVariable("adminToken") ?? "";
+    private readonly string ADMIN_TOKEN = Environment.GetEnvironmentVariable("ADMIN_TOKEN") ?? "";
 
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
@@ -38,6 +38,6 @@ public class AsyncAdminTokenFilter : Attribute, IAsyncActionFilter
     private bool ValidateToken(string token)
     {
         if (token is null) return false;
-        return token == adminToken;
+        return token == ADMIN_TOKEN;
     }
 }

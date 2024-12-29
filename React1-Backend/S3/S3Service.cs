@@ -15,14 +15,14 @@ namespace React1_Backend.S3;
 public class S3Service : IS3Service
 {
     private readonly string bucketName = "gustavbucket1";
-    private readonly string awsAccessKey = Environment.GetEnvironmentVariable("awsAccessKey") ?? "";
-    private readonly string awsSecretKey = Environment.GetEnvironmentVariable("awsSecretKey") ?? "";
+    private readonly string AWS_ACCESS_KEY = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY") ?? "";
+    private readonly string AWS_SECRET_KEY = Environment.GetEnvironmentVariable("AWS_SECRET_KEY") ?? "";
     private readonly Amazon.RegionEndpoint awsEndpoint = Amazon.RegionEndpoint.EUNorth1;
     // private readonly string awsPrefix = "";
 
     public async Task<List<CloudFile>> ListFiles()
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         try
         {
@@ -50,7 +50,7 @@ public class S3Service : IS3Service
 
     public async void ListFilesInConsole()
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         try
         {
@@ -80,7 +80,7 @@ public class S3Service : IS3Service
 
     public async void UploadFile(string filePath)
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         try
         {
@@ -101,7 +101,7 @@ public class S3Service : IS3Service
 
     public async void UploadFile(IFormFile file)
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         try
         {
@@ -128,7 +128,7 @@ public class S3Service : IS3Service
 
     public async void UploadFile(UploadFileRequest file)
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
         try
         {
             byte[] bytes = Convert.FromBase64String(file.Content);
@@ -149,7 +149,7 @@ public class S3Service : IS3Service
 
     public async Task<byte[]> DownloadFile(string fileName)
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         MemoryStream ms = null;
 
@@ -185,7 +185,7 @@ public class S3Service : IS3Service
 
     public async void DeleteFile(string fileName)
     {
-        var client = new AmazonS3Client(awsAccessKey, awsSecretKey, awsEndpoint);
+        var client = new AmazonS3Client(AWS_ACCESS_KEY, AWS_SECRET_KEY, awsEndpoint);
 
         DeleteObjectRequest request = new DeleteObjectRequest
         {

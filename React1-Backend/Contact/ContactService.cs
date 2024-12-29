@@ -8,8 +8,8 @@ namespace React1_Backend.Contact;
 
 public class ContactService
 {
-    private readonly string mailgunDomain = Environment.GetEnvironmentVariable("mailgunDomain") ?? "";
-    private readonly string mailgunApiKey = Environment.GetEnvironmentVariable("mailgunApiKey") ?? "";
+    private readonly string MAILGUN_DOMAIN = Environment.GetEnvironmentVariable("MAILGUN_DOMAIN") ?? "";
+    private readonly string MAILGUN_API_KEY = Environment.GetEnvironmentVariable("MAILGUN_API_KEY") ?? "";
     private readonly ContactRepository _contactRepository;
     private readonly HttpClient _httpClient;
     private readonly string _mailgunUrl;
@@ -20,11 +20,11 @@ public class ContactService
     public ContactService(IHttpClientFactory httpClientFactory, ContactRepository contactRepository)
     {
         _httpClient = httpClientFactory.CreateClient();
-        byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{mailgunApiKey}");
+        byte[] authorizationBytes = Encoding.UTF8.GetBytes($"api:{MAILGUN_API_KEY}");
         string authorizationBase64 = Convert.ToBase64String(authorizationBytes);
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
-        _mailgunUrl = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
-        _domain = $"domain={mailgunDomain}";
+        _mailgunUrl = $"https://api.mailgun.net/v3/{MAILGUN_DOMAIN}/messages";
+        _domain = $"domain={MAILGUN_DOMAIN}";
 
         _contactRepository = contactRepository;
     }
