@@ -10,7 +10,6 @@ namespace React1_Backend.Alibaba;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncAdminTokenFilter(PermissionName = "hi")]
 public class AlibabaController(AlibabaService alibabaService) : ControllerBase
 {
     private readonly AlibabaService _alibabaService = alibabaService;
@@ -30,6 +29,7 @@ public class AlibabaController(AlibabaService alibabaService) : ControllerBase
     }
 
     [HttpPost("upload")]
+    [EndpointDisabledFilter]
     public IActionResult UploadFile([FromBody] UploadFileRequest req)
     {
         try
@@ -53,6 +53,7 @@ public class AlibabaController(AlibabaService alibabaService) : ControllerBase
     }
 
     [HttpGet("download/{fileName}")]
+    [EndpointDisabledFilter]
     public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
     {
         try
@@ -72,6 +73,7 @@ public class AlibabaController(AlibabaService alibabaService) : ControllerBase
     }
 
     [HttpDelete("{fileName}")]
+    [EndpointDisabledFilter]
     public IActionResult DeleteFile([FromRoute] string fileName)
     {
         try

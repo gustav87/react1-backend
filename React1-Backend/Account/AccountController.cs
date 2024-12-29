@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
-using React1_Backend.Filters.ActionFilters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ namespace React1_Backend.Account;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncAdminTokenFilter(PermissionName = "hi")]
 public class AccountController(ILogger<AccountController> logger, AccountService accountService) : ControllerBase
 {
     private readonly ILogger<AccountController> _logger = logger;

@@ -9,7 +9,7 @@ namespace React1_Backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncAdminTokenFilter(PermissionName = "hi")]
+[EndpointDisabledFilter]
 public class BooksController(BooksService booksService) : ControllerBase
 {
     private readonly BooksService _booksService = booksService;

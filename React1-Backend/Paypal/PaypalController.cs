@@ -7,7 +7,7 @@ namespace React1_Backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncAdminTokenFilter(PermissionName = "hi")]
+[AsyncAdminTokenFilter(PermissionName = "hi")]  // This applies the attribute to all actions in the controller.
 public class PaypalController(PaypalService paypalService) : ControllerBase
 {
     private readonly PaypalService _paypalService = paypalService;

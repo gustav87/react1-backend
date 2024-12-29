@@ -61,6 +61,7 @@ builder.Services.AddSingleton<ContactService>();
 // Add scoped or transient services
 builder.Services.AddScoped<ActionFilterExample>();
 builder.Services.AddScoped<AsyncAdminTokenFilter>();
+builder.Services.AddScoped<EndpointDisabledFilter>();
 
 // Add repositories
 builder.Services.AddSingleton<ContactRepository>();

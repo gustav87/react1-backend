@@ -11,13 +11,11 @@ namespace React1_Backend.S3;
 
 [ApiController]
 [Route("api/[controller]")]
-[AsyncAdminTokenFilter(PermissionName = "hi")] // This applies the attribute to all actions in the controller.
 public class S3Controller(S3Service s3Service) : ControllerBase
 {
     private readonly S3Service _s3Service = s3Service;
 
     [HttpGet]
-    [AsyncAdminTokenFilter(PermissionName = "hi")] // This applies the attribute to this action only.
     public async Task<List<CloudFile>> ListFiles()
     {
         var fileList = await _s3Service.ListFiles();
@@ -32,12 +30,14 @@ public class S3Controller(S3Service s3Service) : ControllerBase
     }
 
     [HttpPost("upload/name")]
+    [EndpointDisabledFilter]
     public void UploadFileViaName([FromBody] UploadFileViaNameRequest req)
     {
         _s3Service.UploadFile(req.FilePath);
     }
 
     [HttpPost("upload")]
+    [EndpointDisabledFilter]
     public async Task<IActionResult> UploadFile([FromBody] UploadFileRequest req)
     {
         try
@@ -61,6 +61,7 @@ public class S3Controller(S3Service s3Service) : ControllerBase
     }
 
     [HttpGet("download/{fileName}")]
+    [EndpointDisabledFilter]
     public async Task<IActionResult> DownloadFile([FromRoute] string fileName)
     {
         var file = await _s3Service.DownloadFile(fileName);
