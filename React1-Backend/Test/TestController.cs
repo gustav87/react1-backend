@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,13 +12,20 @@ namespace React1_Backend.Test;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TestController(ILogger<TestController> logger) : ControllerBase
+public class TestController(ILogger<TestController> logger, IHttpContextAccessor httpContextAccessor) : ControllerBase
 {
     private readonly ILogger<TestController> _logger = logger;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
     [HttpGet("weather")]
+    [Authorize]
     public IEnumerable<WeatherForecast> GetWeather()
     {
+        bool isAuthed = _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated;
+        if (isAuthed)
+        {
+            Console.WriteLine("User is authenticated!");
+        }
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),

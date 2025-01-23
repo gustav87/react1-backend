@@ -1,11 +1,12 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
 using React1_Backend.Account;
 using React1_Backend.Alibaba;
+using React1_Backend.Authentication;
 using React1_Backend.Contact;
 using React1_Backend.Contracts;
 using React1_Backend.Filters.ActionFilters;
@@ -15,6 +16,23 @@ using React1_Backend.Services;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add cookie authentication
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "MyCookieName";
+        options.EventsType = typeof(CustomCookieAuthenticationEvents);
+    });
+
+// builder.Services.AddAuthentication("MyCookieScheme")
+//     .AddCookie("MyCookieScheme", options =>
+//     {
+//         options.Cookie.Name = "MyCookieName";
+//         options.EventsType = typeof(CustomCookieAuthenticationEvents);
+//     });
+
+builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 
 // Add the Microsoft.AspNetCore.Http.HttpContextAccessor service as a singleton.
 // .AddHttpContextAccessor() is equivalent to using .AddSingleton(), shown commented out below.
@@ -92,6 +110,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
