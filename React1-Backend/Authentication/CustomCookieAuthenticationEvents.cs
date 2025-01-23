@@ -14,8 +14,8 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 
         // Look for the LastChanged claim.
         string lastChanged = (from c in userPrincipal.Claims
-                           where c.Type == "LastChanged"
-                           select c.Value).FirstOrDefault();
+                              where c.Type == "LastChanged"
+                              select c.Value).FirstOrDefault();
 
         // if (string.IsNullOrEmpty(lastChanged))
         // {
