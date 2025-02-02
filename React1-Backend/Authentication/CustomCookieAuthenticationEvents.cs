@@ -20,7 +20,6 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
         // if (string.IsNullOrEmpty(lastChanged))
         // {
         //     context.RejectPrincipal();
-
         //     await context.HttpContext.SignOutAsync(
         //         CookieAuthenticationDefaults.AuthenticationScheme);
         // }
