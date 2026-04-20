@@ -12,9 +12,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENV ASPNETCORE_URLS http://*:80
-ENV VIRTUAL_HOST=React1-Backend.gstav.se
-ENV LETSENCRYPT_HOST=React1-Backend.gstav.se
+ENV ASPNETCORE_URLS=http://*:80
 EXPOSE 80
 
 ENTRYPOINT ["dotnet", "React1-Backend.dll"]
