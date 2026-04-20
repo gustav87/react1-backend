@@ -1,4 +1,4 @@
-This repo is the backend for react1. A project created with React, Vite and Tailwind CSS in the frontend, and C# .NET 6 in the backend.
+This repo is the backend for react1, a project created with React, Vite and Tailwind CSS in the frontend, and C# .NET 6 in the backend.
 
 There is an associated frontend located at [https://github.com/gustav87/react1-frontend](https://github.com/gustav87/react1-frontend).
 You also need a Mongo DB instance running on port 27017.
