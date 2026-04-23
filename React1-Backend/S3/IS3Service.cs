@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Http;
-using React1_Backend.Contracts;
+using Citrus_Backend.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace React1_Backend.S3;
+namespace Citrus_Backend.S3;
 
 public interface IS3Service
 {

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Account;
+namespace Citrus_Backend.Account;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -38,7 +38,7 @@ steps:
   displayName: run unit tests
   inputs:
     command: 'test'
-    arguments: 'React1-Backend-Tests'
+    arguments: 'Citrus-Backend-Tests'
 
 - task: DotNetCoreCLI@2
   displayName: run integration tests
@@ -46,14 +46,14 @@ steps:
     MONGO_CONNECTION_STRING_INTTEST: $(MONGO_CONNECTION_STRING_INTTEST)
   inputs:
     command: 'test'
-    arguments: 'React1-Backend-IntegrationTests'
+    arguments: 'Citrus-Backend-IntegrationTests'
 
 # Build Docker image from Dockerfile and push to Dockerhub
 - task: Docker@2
   displayName: 'build and push backend'
   inputs:
     containerRegistry: 'gustav87 Docker Hub'
-    repository: 'gustav87/React1-Backend'
+    repository: 'gustav87/gstav-se-citrus-backend'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
     buildContext: '**'

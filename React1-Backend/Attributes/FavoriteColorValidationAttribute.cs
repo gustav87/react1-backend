@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace React1_Backend.Attributes;
+namespace Citrus_Backend.Attributes;
 
 public class FavoriteColorValidationAttribute : ValidationAttribute
 {

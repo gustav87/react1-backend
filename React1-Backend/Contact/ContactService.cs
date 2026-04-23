@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Contact;
+namespace Citrus_Backend.Contact;
 
 public class ContactService
 {
@@ -15,7 +15,7 @@ public class ContactService
     private readonly string _mailgunUrl;
     private readonly string _domain;
     private readonly string _to = "to=gustav87and@gmail.com";
-    private readonly string _subject = "subject=Message from react1 website";
+    private readonly string _subject = "subject=Message from Citrus";
 
     public ContactService(IHttpClientFactory httpClientFactory, ContactRepository contactRepository)
     {
@@ -33,7 +33,7 @@ public class ContactService
     {
         var request = new HttpRequestMessage(HttpMethod.Post, _mailgunUrl);
 
-        string from = $"from=React1 Website <{contactData.Email}>";
+        string from = $"from=Citrus <{contactData.Email}>";
         string msg = $"text=Name: {contactData.Name} \nEmail: {contactData.Email} \nMessage: {contactData.Message}";
         string body = $"{_domain}&{from}&{_to}&{_subject}&{msg}";
 

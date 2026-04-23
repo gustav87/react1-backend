@@ -1,8 +1,8 @@
 using MongoDB.Bson.Serialization.Attributes;
-using React1_Backend.Attributes;
+using Citrus_Backend.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace React1_Backend.Account;
+namespace Citrus_Backend.Account;
 
 public class Account
 {

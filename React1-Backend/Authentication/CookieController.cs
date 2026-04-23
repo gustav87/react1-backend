@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Authentication;
+namespace Citrus_Backend.Authentication;
 
 [ApiController]
 [Route("api/[controller]")]

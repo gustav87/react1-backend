@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace React1_Backend.Services;
+namespace Citrus_Backend.Services;
 
 /*
 Reference: https://stackoverflow.com/a/73125177

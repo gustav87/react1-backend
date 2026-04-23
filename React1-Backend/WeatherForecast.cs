@@ -1,6 +1,6 @@
 using System;
 
-namespace React1_Backend;
+namespace Citrus_Backend;
 
 public class WeatherForecast
 {

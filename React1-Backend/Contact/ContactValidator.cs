@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace React1_Backend.Contact
+namespace Citrus_Backend.Contact
 {
     public class ContactValidator : AbstractValidator<ContactData>
     {

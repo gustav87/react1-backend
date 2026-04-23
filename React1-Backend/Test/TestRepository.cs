@@ -1,4 +1,4 @@
-namespace React1_Backend.Test;
+namespace Citrus_Backend.Test;
 
 public class TestRepository
 {

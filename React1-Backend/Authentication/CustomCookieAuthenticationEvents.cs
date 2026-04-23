@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace React1_Backend.Authentication;
+namespace Citrus_Backend.Authentication;
 
 public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 {

@@ -1,5 +1,5 @@
-using React1_Backend.Contracts;
-namespace React1_Backend_Tests;
+using Citrus_Backend.Contracts;
+namespace Citrus_Backend_Tests;
 
 [TestFixture]
 public class BasicTests

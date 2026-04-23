@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace React1_Backend.Contracts;
+namespace Citrus_Backend.Contracts;
 
 public class GetTokenResponse
 {

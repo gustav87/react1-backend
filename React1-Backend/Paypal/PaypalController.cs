@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using React1_Backend.Filters.ActionFilters;
+using Citrus_Backend.Filters.ActionFilters;
 using System;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Paypal;
+namespace Citrus_Backend.Paypal;
 
 [ApiController]
 [Route("api/[controller]")]

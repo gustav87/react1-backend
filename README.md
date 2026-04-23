@@ -1,8 +1,10 @@
-This repo is the backend for react1, a project created with React, Vite and Tailwind CSS in the frontend, and C# .NET 6 in the backend.
+Third iteration of my website. Built with React, Vite and Tailwind CSS in the frontend, .NET in the backend, and MongoDB.
 
-There is an associated frontend located at [https://github.com/gustav87/react1-frontend](https://github.com/gustav87/react1-frontend).
+This repo is the backend.
+
+The frontend is located at [https://github.com/gustav87/gstav-se-citrus-frontend](https://github.com/gustav87/gstav-se-citrus-frontend).
+
 You also need a Mongo DB instance running on port 27017.
 
 ## Run the backend
-
-The backend is most conveniently run with VS Code. Starting or debugging the app runs the backend on port 5000.
+The backend is most conveniently run with VS Code. The backend runs on port 5000.

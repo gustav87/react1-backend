@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using React1_Backend.Account;
+using Citrus_Backend.Account;
 
-namespace React1_Backend_IntegrationTests;
+namespace Citrus_Backend_IntegrationTests;
 
 public class AccountTests : IntegrationTestBase
 {

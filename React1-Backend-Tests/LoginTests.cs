@@ -1,12 +1,12 @@
 using Moq;
 using MongoDB.Driver;
-using React1_Backend.Account;
+using Citrus_Backend.Account;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace React1_Backend_Tests;
+namespace Citrus_Backend_Tests;
 
 [TestFixture]
 public class LoginTests

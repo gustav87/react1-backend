@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace React1_Backend_IntegrationTests;
+namespace Citrus_Backend_IntegrationTests;
 
 public class IntegrationTestBase
 {

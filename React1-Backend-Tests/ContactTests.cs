@@ -1,7 +1,7 @@
-using React1_Backend.Contact;
+using Citrus_Backend.Contact;
 using FluentValidation.TestHelper;
 
-namespace React1_Backend_Tests;
+namespace Citrus_Backend_Tests;
 
 [TestFixture]
 public class ContactTests

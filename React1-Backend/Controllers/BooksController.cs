@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using React1_Backend.Contracts;
-using React1_Backend.Filters.ActionFilters;
-using React1_Backend.Services;
+using Citrus_Backend.Contracts;
+using Citrus_Backend.Filters.ActionFilters;
+using Citrus_Backend.Services;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace React1_Backend.Controllers;
+namespace Citrus_Backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

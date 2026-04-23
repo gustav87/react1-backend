@@ -1,4 +1,4 @@
-namespace React1_Backend.Paypal;
+namespace Citrus_Backend.Paypal;
 
 public class PaypalRepository
 {

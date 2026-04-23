@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>React1_Backend_IntegrationTests</RootNamespace>
+    <RootNamespace>Citrus_Backend_IntegrationTests</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
 
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\React1-Backend\React1-Backend.csproj" />
+    <ProjectReference Include="..\Citrus-Backend\Citrus-Backend.csproj" />
   </ItemGroup>
 
 </Project>

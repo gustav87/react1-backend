@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/React1-Backend.sln",
+        "${workspaceFolder}/Citrus-Backend.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/React1-Backend.sln",
+        "${workspaceFolder}/Citrus-Backend.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
@@ -33,7 +33,7 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/React1-Backend.sln"
+        "${workspaceFolder}/Citrus-Backend.sln"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -43,7 +43,7 @@
       "type": "process",
       "args": [
         "test",
-        "React1-Backend-Tests"
+        "Citrus-Backend-Tests"
       ],
       "problemMatcher": "$msCompile",
       "group": {

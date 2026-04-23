@@ -1,6 +1,6 @@
 using System;
 
-namespace React1_Backend.Contact;
+namespace Citrus_Backend.Contact;
 
 public class ContactData
 {

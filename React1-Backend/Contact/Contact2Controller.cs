@@ -7,7 +7,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Contact;
+namespace Citrus_Backend.Contact;
 
 [ApiController]
 [Route("api/[controller]")]

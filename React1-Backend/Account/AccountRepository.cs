@@ -1,11 +1,11 @@
 using MongoDB.Driver;
-using React1_Backend.Repositories;
+using Citrus_Backend.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Account;
+namespace Citrus_Backend.Account;
 
-public class AccountRepository(MongoClient mongoClient, string databaseName = "React1-Backend") : MongoDbBase(mongoClient, databaseName)
+public class AccountRepository(MongoClient mongoClient, string databaseName = "citrus-db") : MongoDbBase(mongoClient, databaseName)
 {
     // public async Task<List<Account>> GetAsync() =>
     //   await _accountCollection.Find(_ => true).ToListAsync();

@@ -4,9 +4,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace React1_Backend.Repositories;
+namespace Citrus_Backend.Repositories;
 
-public class MongoDbBase(MongoClient mongoClient, string databaseName = "React1-Backend")
+public class MongoDbBase(MongoClient mongoClient, string databaseName = "citrus-db")
 {
     private readonly MongoClient _mongoClient = mongoClient;
     private readonly string databaseName = databaseName;

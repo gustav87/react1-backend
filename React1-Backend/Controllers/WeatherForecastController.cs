@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace React1_Backend.Controllers;
+namespace Citrus_Backend.Controllers;
 
 [ApiController]
 [Route("[controller]")]

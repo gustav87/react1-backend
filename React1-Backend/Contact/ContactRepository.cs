@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Contact;
+namespace Citrus_Backend.Contact;
 
 public class ContactRepository
 {
@@ -9,7 +9,7 @@ public class ContactRepository
 
     public ContactRepository(MongoClient mongoClient)
     {
-        IMongoDatabase mongoDatabase = mongoClient.GetDatabase("React1-Backend");
+        IMongoDatabase mongoDatabase = mongoClient.GetDatabase("citrus-db");
         _mailCollection = mongoDatabase.GetCollection<Mail>(nameof(Mail));
     }
 

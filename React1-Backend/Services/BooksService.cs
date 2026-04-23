@@ -1,10 +1,10 @@
-using React1_Backend.Contracts;
+using Citrus_Backend.Contracts;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Services;
+namespace Citrus_Backend.Services;
 
 public class BooksService
 {

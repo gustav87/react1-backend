@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Filters.ActionFilters;
+namespace Citrus_Backend.Filters.ActionFilters;
 
 public class EndpointDisabledFilter : Attribute, IAsyncActionFilter
 {

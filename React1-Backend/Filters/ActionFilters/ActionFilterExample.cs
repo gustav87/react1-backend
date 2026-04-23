@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
-namespace React1_Backend.Filters.ActionFilters;
+namespace Citrus_Backend.Filters.ActionFilters;
 
 public class ActionFilterExample(IHttpContextAccessor httpContextAccessor) : IActionFilter
 {

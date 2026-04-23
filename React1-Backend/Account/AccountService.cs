@@ -1,9 +1,9 @@
-using React1_Backend.Services;
+using Citrus_Backend.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Account;
+namespace Citrus_Backend.Account;
 
 public class AccountService(AccountRepository accountRepository) : IAccountService
 {

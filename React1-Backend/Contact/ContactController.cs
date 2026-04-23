@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Contact;
+namespace Citrus_Backend.Contact;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -34,9 +34,9 @@ public class ContactController(ILogger<ContactController> logger) : ControllerBa
         request.Headers.Authorization = new AuthenticationHeaderValue("Basic", authorizationBase64);
 
         string domain = $"domain={MAILGUN_DOMAIN}";
-        string from = $"from=React1 Website <{req.Email}>";
+        string from = $"from=Citrus <{req.Email}>";
         string to = "to=gustav87and@gmail.com";
-        string subject = "subject=Message from react1 website";
+        string subject = "subject=Message from Citrus";
         string msg = $"text=Name: {req.Name} \nEmail: {req.Email} \nMessage: {req.Message}";
         string body = $"{domain}&{from}&{to}&{subject}&{msg}";
 

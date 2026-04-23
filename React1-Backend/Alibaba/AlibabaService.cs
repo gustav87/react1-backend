@@ -1,5 +1,5 @@
 using Aliyun.OSS;
-using React1_Backend.Contracts;
+using Citrus_Backend.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace React1_Backend.Alibaba;
+namespace Citrus_Backend.Alibaba;
 
 public class AlibabaService : IAlibabaService
 {
